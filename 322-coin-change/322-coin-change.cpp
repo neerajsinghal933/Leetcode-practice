@@ -5,7 +5,7 @@ public:
         vector<vector<int>>dp(n+1, vector<int>(amount+1, 0));
         for(int j=0;j<=amount;j++)
             dp[0][j] = INT_MAX-1;
-        // dp[]
+        dp[0][0] = 1;
         for(int i=1;i<=n;i++)
         {
             for(int j=1;j<=amount;j++)
