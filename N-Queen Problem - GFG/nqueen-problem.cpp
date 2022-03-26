@@ -9,43 +9,42 @@ using namespace std;
 
 class Solution{
 public:
-
-    bool isSafe(int x, int y, vector<vector<int>>vis, int n)
+    bool isSafe(int row, int col, vector<vector<int>>&board)
     {
-        for(int i=0;i<y;i++)
+        for(int j=0;j<col;j++)
         {
-            if(vis[x][i]==1)
-                return false;
+            if(board[row][j]==1)
+            return  false;
         }
-        for(int i=x,j=y;i>=0 and j>=0; i--, j--)
+        for(int i=row, j=col;i>=0 and j>=0; i--, j--)
         {
-            if(vis[i][j])
-                return false;
+            if(board[i][j]==1)
+            return false;
         }
-        for(int i=x, j=y; i<n and j>=0; i++, j--)
+        for(int i=row, j=col; i<board.size() and j>=0; i++,j--)
         {
-            if(vis[i][j])
+            if(board[i][j]==1)
             return false;
         }
         return true;
     }
-    
-    void fun(vector<vector<int>>&vis, int n, int col, vector<int>&temp, vector<vector<int>>&res)
+
+    void solve(vector<vector<int>>&board, int n, int col, vector<vector<int>>&res, vector<int>&temp)
     {
-        if(col>=n)
+        if(col==n)
         {
             res.push_back(temp);
             return;
         }
         for(int row=0;row<n;row++)
         {
-            if(isSafe(row, col, vis, n)==true)
+            if(isSafe(row, col, board)==true)
             {
-                vis[row][col] = 1;
+                board[row][col] = 1;
                 temp.push_back(row+1);
-                fun(vis, n, col+1, temp, res);
+                solve(board, n, col+1, res, temp);
                 temp.pop_back();
-                vis[row][col] = 0;
+                board[row][col] = 0;
             }
         }
     }
@@ -53,11 +52,11 @@ public:
     vector<vector<int>> nQueen(int n) {
         // code here
         vector<vector<int>>res;
-        vector<vector<int>>vis(n, vector<int>(n, 0));
         vector<int>temp;
-        fun(vis, n, 0, temp, res);
-        sort(res.begin(), res.end());
+        vector<vector<int>>board(n, vector<int>(n, 0));
+        solve(board, n, 0, res, temp);
         return res;
+        
     }
 };
 
