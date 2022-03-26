@@ -1,5 +1,5 @@
 # N-Queen Problem
-## Hard 
+##  Hard 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">The n-queens puzzle is the problem of placing <strong>n</strong> queens on a&nbsp;(<strong>n×n)</strong> chessboard such that no two queens can&nbsp;attack each other.<br>
 Given an integer n, find all distinct solutions to the n-queens puzzle. Each solution contains distinct board configurations of the n-queens’ placement, where the solutions are&nbsp;a permutation of [1,2,3..n] in increasing order, here&nbsp;the number in the <em>ith</em>&nbsp;place denotes&nbsp;that the <em>ith</em>-column queen is&nbsp;placed in the row with that number. For eg below figure represents a chessboard [3 1 4 2].<br>
