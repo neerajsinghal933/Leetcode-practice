@@ -1,27 +1,37 @@
 class Solution {
 public:
-    // vector<vector<int>>res;
-    set<vector<int>>res;
-    vector<vector<int>> permuteUnique(vector<int>& nums) {
-        vector<int>temp;
-        int n = nums.size();
-        fun(nums, n, 0, temp);
-        vector<vector<int>>v(res.begin(), res.end());
-        return v;
-    }
-    
-     void fun(vector<int>&nums, int n, int idx, vector<int>temp)
+    vector<vector<int>> ans;
+    void dfs(vector<int> &temp, int n,unordered_map<int,int> &m)
     {
-        if(idx==n)
+        if(n==0)
         {
-            res.insert(nums);
+            ans.push_back(temp);
             return;
         }
-        for(int i=idx;i<n;i++)
+		
+        for(auto &it:m)
         {
-            swap(nums[i], nums[idx]);
-            fun(nums, n, idx+1, temp);
-            swap(nums[i], nums[idx]);
+            if(it.second<=0) continue;
+
+            it.second--;
+            temp.push_back(it.first);
+			
+            dfs(temp,n-1,m);
+			
+            temp.pop_back();
+            it.second++;
         }
+    }
+    
+    vector<vector<int>> permuteUnique(vector<int>& ar) {
+      
+        unordered_map<int,int> m;
+        for(int i:ar)
+        m[i]++;
+
+        vector<int> temp;
+        dfs(temp,ar.size(),m);
+
+        return ans;
     }
 };
