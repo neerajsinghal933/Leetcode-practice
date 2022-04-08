@@ -17,7 +17,7 @@ public:
         if(dist.size()-1>=hour)
             return -1;
         int low = 1;
-        int high = *max_element(dist.begin(),dist.end())*100;
+        int high = 1e7;
         int ans = INT_MAX;
         while(low<=high)
         {
