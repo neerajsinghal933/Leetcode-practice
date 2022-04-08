@@ -9,7 +9,7 @@ public:
             sum += ceil(double(dist[i])/double(speed));
         }
         
-        sum += double(dist.back())/double(speed);
+        sum += double(dist[dist.size()-1])/double(speed);
         return sum<=hour;
     }
     
