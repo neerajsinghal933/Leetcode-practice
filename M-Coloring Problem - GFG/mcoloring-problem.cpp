@@ -7,12 +7,12 @@ using namespace std;
 //Function to determine if graph can be coloured with at most M colours such
 //that no two adjacent vertices of graph are coloured with same colour.
 
-bool isSafe(bool graph[101][101], int v, int c, vector<int>col, int idx)
+bool isSafe(bool graph[101][101], int v, int x, vector<int>&col, int idx)
 {
-    for(int j=0;j<v;j++)
+    for(int i=0;i<v;i++)
     {
-        if(graph[idx][j] == 1 and c == col[j])
-            return false;
+        if(graph[idx][i]==1 and col[i]==x)
+        return false;
     }
     return true;
 }
@@ -26,10 +26,10 @@ bool fun(bool graph[101][101], int m, int v, vector<int>&col, int idx)
     {
         if(isSafe(graph, v, i, col, idx)==true)
         {
-         col[idx] = i;
-         if(fun(graph, m, v, col, idx+1)==true)
-            return true;
-         col[idx]=0;
+            col[idx] = i;
+            if(fun(graph, m, v, col, idx+1))
+                return true;
+            col[idx] = 0;
         }
     }
     return false;
@@ -40,7 +40,7 @@ bool graphColoring(bool graph[101][101], int m, int V)
     // your code here
     vector<int>col(V, 0);
     if(fun(graph, m, V, col, 0)==true)
-        return true;
+    return true;
     return false;
 }
 
