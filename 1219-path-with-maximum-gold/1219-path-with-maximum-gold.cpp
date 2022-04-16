@@ -18,19 +18,17 @@ public:
         return ans==INT_MIN?0:ans;
     }
     
-    void fun(vector<vector<int>>&grid, int n, int m, int i, int j, vector<vector<int>>&vis, int cnt)
+    void fun(vector<vector<int>>&grid, int n, int m, int i, int j, vector<vector<int>> &vis, int cnt)
     {
         
-        if(i<0 or i>=n or j<0 or j>=m or !grid[i][j] )
+        if(i<0 or i>=n or j<0 or j>=m or (grid[i][j] == 0) or vis[i][j])
         {
+            cnt -= grid[i][j];
             ans = max(ans, cnt);
             return;
         }
-        // if(vis[i][j])
-        //     return;
+        
         vis[i][j] = 1;
-        int k = grid[i][j];
-        grid[i][j] = 0;
         if(i+1<n)
             fun(grid, n, m, i+1, j, vis, cnt + grid[i+1][j]);
         if(i-1>=0)
@@ -39,7 +37,7 @@ public:
             fun(grid, n, m, i, j+1, vis, cnt + grid[i][j+1]);
         if(j-1>=0)
             fun(grid, n, m, i, j-1, vis, cnt + grid[i][j-1]);
+        ans = max(ans, cnt);
         vis[i][j] = 0;
-        grid[i][j] = k;
     }
 };
