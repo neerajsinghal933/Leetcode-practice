@@ -40,19 +40,19 @@ struct val{
 /*You are required to complete this method*/
 static bool comp(struct val v1, struct val v2)
 {
-    if(v1.first < v2.first)
-        return true;
-    else
-        return v1.first < v2.first;
+    // if(v1.first < v2.first)
+    //     return true;
+    // else
+        return v1.second <= v2.second;
 }
 int maxChainLen(struct val p[],int n)
 {
     sort(p, p+n, comp);
     // for(int i = 1; i < n; i++)
     //     cout<<p[i].first<<" "<<p[i].second<<endl;
-    long long int last = INT_MIN;
-    int cnt = 0;
-    for(int i = 0; i < n; i++)
+    long long int last = p[0].second;
+    int cnt = 1;
+    for(int i = 1; i < n; i++)
     {
         if(p[i].first > last)
         {
