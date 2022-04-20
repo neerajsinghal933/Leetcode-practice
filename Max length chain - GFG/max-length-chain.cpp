@@ -43,7 +43,7 @@ static bool comp(struct val v1, struct val v2)
     // if(v1.first < v2.first)
     //     return true;
     // else
-        return v1.second <= v2.second;
+        return v1.first <= v2.first;
 }
 int maxChainLen(struct val p[],int n)
 {
