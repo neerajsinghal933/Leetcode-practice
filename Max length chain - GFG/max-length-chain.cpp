@@ -59,11 +59,11 @@ int maxChainLen(struct val p[],int n)
             cnt++;
             last = p[i].second;
         }
-        // else
-        // {
-        //     if(p[i].second < last)
-        //         last = p[i].second;
-        // }
+        else
+        {
+            if(p[i].second < last)
+                last = p[i].second;
+        }
     }
     return cnt;
             //Your code here
