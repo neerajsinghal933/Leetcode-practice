@@ -50,7 +50,7 @@ int maxChainLen(struct val p[],int n)
     sort(p, p+n, comp);
     // for(int i = 1; i < n; i++)
     //     cout<<p[i].first<<" "<<p[i].second<<endl;
-    int last = -10000;
+    long long int last = INT_MIN;
     int cnt = 0;
     for(int i = 0; i < n; i++)
     {
