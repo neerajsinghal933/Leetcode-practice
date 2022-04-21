@@ -9,39 +9,73 @@ using namespace std;
 
 class Solution {
   public:
-    int fun(vector<int>&res, int n)
+    int kanade(int arr[], int& start, int& finish, int n)
     {
-        int ans = INT_MIN;
-        int cnt = 0;
-        for(int i=0;i<n;i++)
+        int sum = 0, max_sum = INT_MIN, i;
+        
+        finish = -1;
+        int local_start = 0;
+        for(i=0;i<n;i++)
         {
-            cnt += res[i];
-            ans = max(ans, cnt);
-            cnt = max(0, cnt);
-        }
-        return ans;
-    }
-  
-    int maximumSumRectangle(int r, int c, vector<vector<int>> m) {
-        int ans = INT_MIN;
-        for(int i=0;i<r;i++)
-        {
-            vector<int>res(c);
-            for(int j=i;j<r;j++)
+            sum += arr[i];
+            if(sum<0)
             {
-                
-                for(int k=0;k<c;k++)
-                {
-                    res[k] += m[j][k];
-                }
-                ans = max(ans, fun(res, c));
+                sum = 0;
+                local_start = i+1;
+            }
+            else if(sum>max_sum)
+            {
+                max_sum = sum;
+                start = local_start;
+                finish = i;
             }
         }
-        return ans;
-        // code here
+        if(finish!=-1)
+            return max_sum;
+        max_sum = arr[0];
+        start = finish = 0;
+        for(i=1;i<n;i++)
+        {
+            if(arr[i]>max_sum)
+            {
+                max_sum = arr[i];
+                start = finish = i;
+            }
+        }
+        return max_sum;
     }
-    
-    
+  
+    int maximumSumRectangle(int R, int C, vector<vector<int>> M) {
+        // code here
+        int max_sum = INT_MIN, finalLeft, finalRight, finalTop, finalBottom;
+        int left, right, i;
+        int temp[R], sum, start, finish;
+        
+        for(left=0; left<C; left++)
+        {
+            memset(temp, 0, sizeof(temp));
+            
+            for(right=left; right<C; right++)
+            {
+                for(i=0; i<R; i++)
+                {
+                    temp[i] += M[i][right];
+                }
+                
+                sum = kanade(temp, start, finish, R);
+                
+                if(sum > max_sum)
+                {
+                    max_sum = sum;
+                    finalLeft = left;
+                    finalRight = right;
+                    finalTop = start;
+                    finalBottom = finish;
+                }
+            }
+        }
+        return max_sum;
+    }
 };
 
 
