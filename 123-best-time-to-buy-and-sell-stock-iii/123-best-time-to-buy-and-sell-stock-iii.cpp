@@ -1,27 +1,25 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& p) {
-        int n = p.size();
-    vector<int>dp(n, 0);
-    if(n==0)
-        return 0;
-    int r = p[n-1];
-    int l = p[0];
-
-    for(int i=n-2;i>=0;i--)
-    {
-        if(p[i] > r)
-            r = p[i];
-        dp[i] = max(dp[i+1], r - p[i]);
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        vector<vector<vector<int>>>dp(n, vector<vector<int>>(2, vector<int>(3,-1)));
+        return fun(prices, 0, 1, 2, dp);
     }
-
-    for(int i=1;i<n;i++)
+    
+    int fun(vector<int>&p, int idx, bool buy, int k, vector<vector<vector<int>>>&dp)
     {
-        if(l > p[i])
-            l = p[i];
-        dp[i] = max(dp[i-1], dp[i] + p[i] - l);
-    }
-    return dp[n-1];
-        
+        if(idx>=p.size() or k==0)
+            return 0;
+        if(dp[idx][buy][k]!=-1)
+            return dp[idx][buy][k];
+        if(buy)
+        {
+            return dp[idx][buy][k] = max(-p[idx] + fun(p, idx+1, !buy, k, dp), fun(p, idx+1, buy, k, dp));
+            
+        }
+        else
+        {
+            return dp[idx][buy][k] = max(p[idx] + fun(p, idx+1, !buy, k-1, dp), fun(p, idx+1, buy, k, dp));
+        }
     }
 };
