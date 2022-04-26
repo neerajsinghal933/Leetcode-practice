@@ -18,9 +18,8 @@ class Solution{
         while(s<=e)
         {
             long long mid = s + (e-s)/2;
-            if(v[mid]==x)
-            return mid;
-            if(v[mid]<x)
+            
+            if(v[mid]<=x)
             {
                 ans = mid;
                 s = mid+1;
