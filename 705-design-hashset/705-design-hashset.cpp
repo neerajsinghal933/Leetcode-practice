@@ -1,28 +1,23 @@
 class MyHashSet {
 public:
-    // map<int, int>m;
-    int hash[1000001];
+    vector<int> vect;
+    int size;
     MyHashSet() {
-        memset(hash, 0, sizeof(hash));
+        size = 1e6+1;
+        vect.resize(size);
+        
     }
     
     void add(int key) {
-        // m[key] = 1;
-        hash[key]=1;
+        vect[key] = 1;
     }
     
     void remove(int key) {
-        // m[key] = 0;
-        hash[key] = 0;
+        vect[key] = 0;
     }
     
     bool contains(int key) {
-        // if(m[key]==0)
-        //     return false;
-        // return true;
-        if(hash[key]==0)
-            return false;
-        return true;
+        return vect[key];
     }
 };
 
