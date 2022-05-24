@@ -1,11 +1,10 @@
 class MyHashSet {
 public:
+    
+    int sz=1000001;
     vector<int> vect;
-    int size;
     MyHashSet() {
-        size = 1e6+1;
-        vect.resize(size);
-        
+        vect.resize(sz);
     }
     
     void add(int key) {
