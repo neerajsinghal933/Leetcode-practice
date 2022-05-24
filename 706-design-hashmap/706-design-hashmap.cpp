@@ -1,10 +1,11 @@
 class MyHashMap {
 public:
 
-    int* hash;
+    int hash[1000001];
     MyHashMap() {
         
-        hash = new int[1000001];
+        // hash = new int[1000001];
+        // int hash[1000001];
         // initializing all entries in the hashtable with -1 so that -1 will be returned for misses
 		for(int i=0;i<1000001;i++) {
             hash[i] = -1;
