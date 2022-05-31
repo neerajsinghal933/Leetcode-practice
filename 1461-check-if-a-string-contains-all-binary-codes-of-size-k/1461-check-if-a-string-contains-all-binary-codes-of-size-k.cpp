@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool hasAllCodes(string s, int k) {
-        set<string>st;
+        unordered_set<string>st;
         int n = s.size();
         for(int i=0;i<n-k+1;i++)
         {
