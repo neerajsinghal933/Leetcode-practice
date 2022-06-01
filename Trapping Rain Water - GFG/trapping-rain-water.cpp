@@ -25,7 +25,7 @@ class Solution{
         long long cnt = 0;
         for(int i=1;i<n-1;i++)
         {
-            if(min(l[i] , r[i]) - arr[i] > 0)
+            // if(min(l[i] , r[i]) - arr[i] > 0)
                 cnt += min(l[i] , r[i]) - arr[i];
         }
         return cnt;
