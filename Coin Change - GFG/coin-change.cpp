@@ -5,37 +5,25 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
-    long long int count( int coin[], int m, int n )
-    {
-    //   sort(coin, coin+m);
-       vector<vector<long long>>v(m+1, vector<long long>(n+1, 0));
-       
-       for(long long i=0;i<=m;i++)
-       {
-           v[i][0] = 1;
-       }
-       
-       for(long long i=1;i<=m;i++)
-       {
-           for(long long j=1;j<=n;j++)
-           {
-               if(coin[i-1] > j)
-                    v[i][j] = v[i-1][j];
-                else
+    long long int count(int s[], int m, int n) {
+
+        // code here.
+        vector<vector<long long>>dp(m+1, vector<long long>(n+1, 0));
+        for(int i=0;i<=m;i++)
+            dp[i][0] = 1;
+        for(int i=1;i<=m;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if(j - s[i-1] >= 0)
                 {
-                    v[i][j] = v[i-1][j] + v[i][j-coin[i-1]];
+                    dp[i][j] = dp[i-1][j] + dp[i][j-s[i-1]];
                 }
-           }
-       }
-    //   for(int i=0;i<=m;i++)
-    //   {
-    //       for(int j=0;j<=n;j++)
-    //       {
-    //           cout<<v[i][j]<<" ";
-    //       }
-    //       cout<<'\n';
-    //   }
-        return v[m][n];
+                else
+                    dp[i][j] = dp[i-1][j];
+            }
+        }
+        return dp[m][n];
     }
 };
 
