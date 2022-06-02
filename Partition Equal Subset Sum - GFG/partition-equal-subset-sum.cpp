@@ -14,24 +14,24 @@ public:
         // code here
         int sum = 0;
         for(int i=0;i<n;i++)
-        sum += arr[i];
-        if(sum&1)
-        return 0;
-        return fun(arr, n-1, sum/2)==true?1:0;
+            sum += arr[i];
+        if(sum & 1)
+            return 0;
+        sum /= 2;
+        return fun(n, arr, sum);
     }
     
-    bool fun(int arr[], int n, int k)
+    bool fun(int n, int arr[], int k)
     {
-        
-        if(n<0 and k==0)
-        return 1;
-        if(k==0)
-        return 1;
-        if(n<0)
-        return 0;
-        if(arr[n]<=k)
-           return fun(arr, n-1, k-arr[n]) or fun(arr, n-1, k);
-         return fun(arr, n-1, k);
+        if(n==0 or k==0)
+        {
+            if(k==0)
+                return 1;
+            return 0;
+        }
+        if(k-arr[n-1]>=0)
+            return fun(n-1, arr, k-arr[n-1]) or fun(n-1, arr, k);
+        return fun(n-1, arr, k);
     }
 };
 
