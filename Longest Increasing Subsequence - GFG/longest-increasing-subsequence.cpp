@@ -15,12 +15,12 @@ class Solution
        vector<int>dp(n+1, 1);
        for(int i=n-2;i>=0;i--)
        {
-           dp[i] = fun(n, a, i, dp);
+           dp[i] = fun(n, a, dp, i);
        }
        return *max_element(dp.begin(), dp.end());
     }
     
-    int fun(int n, int a[], int i, vector<int>&dp)
+    int fun(int n, int a[], vector<int>&dp, int i)
     {
         int x = 0;
         for(int j=i+1;j<n;j++)
@@ -30,7 +30,6 @@ class Solution
         }
         return x+1;
     }
-    
 };
 
 // { Driver Code Starts.
