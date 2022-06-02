@@ -9,6 +9,7 @@ class Solution
 {
     public:
     //Function to find length of longest increasing subsequence.
+    int ans = INT_MIN;
     int longestSubsequence(int n, int a[])
     {
        // your code here
@@ -17,7 +18,7 @@ class Solution
        {
            dp[i] = fun(n, a, dp, i);
        }
-       return *max_element(dp.begin(), dp.end());
+       return ans;
     }
     
     int fun(int n, int a[], vector<int>&dp, int i)
@@ -28,6 +29,7 @@ class Solution
             if(a[j]>a[i])
                 x = max(x, dp[j]);
         }
+        ans = max(ans, x+1);
         return x+1;
     }
 };
