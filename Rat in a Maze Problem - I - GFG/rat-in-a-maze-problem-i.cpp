@@ -8,45 +8,44 @@ using namespace std;
  // } Driver Code Ends
 // User function template for C++
 
-
 class Solution{
     public:
-    void fun(vector<vector<int>>&m, int n, vector<vector<int>>&vis, int x, int y, vector<string>&res, string temp)
-    {
-        if(x==n-1 and y==n-1)
-        {
-            res.push_back(temp);
-            return;
-        }
-        if(x<0 or x>=n or y<0 or y>=n)
-            return;
-        if(vis[x][y]==true)
-            return;
-        vis[x][y]=1;
-        if(m[x][y]==1)
-        {
-            fun(m, n, vis, x+1, y, res, temp+'D');
-            fun(m, n, vis, x, y-1, res, temp+'L');
-            fun(m, n, vis, x, y+1, res, temp+'R');
-            fun(m, n, vis, x-1, y, res, temp+'U');
-        }
-        vis[x][y]=0;
-    }
-    
-    
     vector<string> findPath(vector<vector<int>> &m, int n) {
         // Your code goes here
         vector<string>res;
+        vector<vector<int>>vis(n, vector<int>(n, 0));
         if(m[0][0]==0 or m[n-1][n-1]==0)
         {
             res.push_back("-1");
             return res;
         }
-        vector<vector<int>>vis(n, vector<int>(n, 0));
-        fun(m, n, vis, 0, 0, res, "");
-        // sort(res.begin(), res.end());
-        return res;
         
+        fun(m, n, res, vis, 0, 0, "");
+        return res;
+    }
+    
+    void fun(vector<vector<int>>&m, int n, vector<string>&res, vector<vector<int>>&vis, int i, int j, string t)
+    {
+        if(i==n-1 and j==n-1)
+        {
+            // cout<<"YES";
+            res.push_back(t);
+            return ;
+        }
+        if(i<0 or i>=n or j<0 or j>=n)
+            return ;
+        
+        if(vis[i][j]==1)
+            return;
+        vis[i][j]=1;
+        if(m[i][j]==1)
+        {
+            fun(m, n, res, vis, i+1, j, t + 'D');
+            fun(m, n, res, vis, i, j-1, t + 'L');
+            fun(m, n, res, vis, i, j+1, t + 'R');
+            fun(m, n, res, vis, i-1, j, t + 'U');
+        }
+        vis[i][j] = 0;
     }
 };
 
