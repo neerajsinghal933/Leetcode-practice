@@ -14,15 +14,21 @@ class Solution {
         unordered_map<int, stack<int>>st;
         for(int i=0;i<2*e;i+=2)
         {
-            st[A[i]].push(A[i+1]);
+            // st[A[i]].push(A[i+1]);
+            st[B[i]].push(B[i+1]);
         }
         for(int i=0;i<2*e;i+=2)
         {
-            if(st[B[i]].empty())
+            // if(st[B[i]].empty())
+            //     return 0;
+            // if(st[B[i]].top()!=B[i+1])
+            //     return 0;
+            // st[B[i]].pop();
+            if(st[A[i]].empty())
                 return 0;
-            if(st[B[i]].top()!=B[i+1])
+            if(st[A[i]].top()!=A[i+1])
                 return 0;
-            st[B[i]].pop();
+            st[A[i]].pop();
         }
         return 1;
     }
