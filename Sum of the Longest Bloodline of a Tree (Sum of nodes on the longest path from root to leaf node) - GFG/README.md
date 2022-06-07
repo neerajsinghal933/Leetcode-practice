@@ -1,5 +1,5 @@
 # Sum of the Longest Bloodline of a Tree (Sum of nodes on the longest path from root to leaf node)
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:20px">Given a binary tree of size&nbsp;<strong>N.</strong>&nbsp;Your task is to complete the function&nbsp;<strong>sumOfLongRootToLeafPath(),</strong>&nbsp;that find the sum of all nodes on the longest path from root to leaf node.<br>
 If two or more paths compete for the longest path, then the path having maximum sum of nodes is being considered.</span></p>
