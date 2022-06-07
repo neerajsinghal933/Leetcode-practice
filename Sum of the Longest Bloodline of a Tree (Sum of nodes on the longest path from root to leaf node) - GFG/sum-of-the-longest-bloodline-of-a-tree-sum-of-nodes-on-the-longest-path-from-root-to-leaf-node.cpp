@@ -117,26 +117,32 @@ struct Node
 class Solution
 {
 public:
-
-    int height(Node* root)
-    {
-        if(!root)
-        return 0;
-        return 1 + max(height(root->left), height(root->right));
-    }
-    
     
     int sumOfLongRootToLeafPath(Node *root)
     {
         //code here
         if(!root)
             return 0;
-        if(height(root->left) > height(root->right))
-            return root->data + sumOfLongRootToLeafPath(root->left);
-        else if(height(root->left) < height(root->right))
-            return root->data + sumOfLongRootToLeafPath(root->right);
-        else
-            return root->data + max(sumOfLongRootToLeafPath(root->left), sumOfLongRootToLeafPath(root->right));
+        queue<pair<Node*, int>>q;
+        q.push({root, root->data});
+        int ans;
+        while(!q.empty())
+        {
+            ans = INT_MIN;
+            int sz = q.size();
+            for(int i=0;i<sz;i++)
+            {
+                Node* curr = q.front().first;
+                int sum = q.front().second;
+                ans = max(ans, sum);
+                q.pop();
+                if(curr->left)
+                q.push({curr->left, sum + curr->left->data});
+                if(curr->right)
+                q.push({curr->right, sum + curr->right->data});
+            }
+        }
+        return ans;
     }
 };
 
