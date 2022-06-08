@@ -31,7 +31,7 @@ class Solution
         }
         if(c!=str[idx])
             k--;
-        for(int i=idx+1;i<n;i++)
+        for(int i=idx;i<n;i++)
         {
             if(str[i]==c)
             {
