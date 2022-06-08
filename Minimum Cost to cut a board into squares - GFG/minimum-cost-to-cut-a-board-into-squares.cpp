@@ -9,45 +9,42 @@ using namespace std;
 
 class Solution {
 public:
-    static bool comp(int a, int b)
-    {
-        return a>b;
-    }
-    int minimumCostOfBreaking(vector<int> x, vector<int> y, int m, int n){
+    int minimumCostOfBreaking(vector<int> X, vector<int> Y, int M, int N){
         //Write your code here
+        int xpieces = 1, ypieces = 1;
+        sort(X.begin(), X.end(), greater<int>());
+        sort(Y.begin(), Y.end(), greater<int>());
+        int i = 0, j = 0, cost = 0;
+        //hpieces -> no. of piences for horizontal cut
+        //hpieces will increase with vertical cut
+        // vertical cut-> no of pieces of hpieces will be used, it will increase v cut piece by 1
         
-        sort(x.begin(), x.end(), comp);
-        sort(y.begin(), y.end(), comp);
-        
-        int i=0, j=0;
-        int cntX=1, cntY=1;
-        int ans = 0;
-        while(i<m and j<n)
+        while(i < M && j < N)
         {
-            if(x[i]>=y[j])
+            if(X[i] >= Y[j])
             {
-                cntY += 1;
-                ans += x[i] * cntX;
-                i++;
+                cost += X[i++]*ypieces;
+                xpieces++;
             }
             else
             {
-                cntX += 1;
-                ans += y[j] * cntY;
-                j++;
+                cost += Y[j++]*xpieces;
+                ypieces++;
             }
         }
-        while(i<m)
+        while(i<M)
         {
-            ans += x[i] * cntX;
-            i++;
+            cost += X[i++]*ypieces;
+            xpieces++;
         }
-        while(j<n)
+        while(j < N)
         {
-            ans += y[j] * cntY;
-            j++;
+            cost += Y[j++]*xpieces;
+            ypieces++;
         }
-        return ans;
+        return cost;
+        
+        
     }
 };
 
