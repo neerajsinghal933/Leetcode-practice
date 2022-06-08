@@ -6,14 +6,14 @@ using namespace std;
 class Solution
 {
     public:
+    //Function to find the maximum number of meetings that can
+    //be performed in a meeting room.
     
-    static bool myComp(pair<int, int>&a, pair<int, int>&b)
+    static bool comp(pair<int, int>&a, pair<int, int>&b)
     {
         return a.second < b.second;
     }
     
-    //Function to find the maximum number of meetings that can
-    //be performed in a meeting room.
     int maxMeetings(int start[], int end[], int n)
     {
         // Your code here
@@ -22,21 +22,18 @@ class Solution
         {
             v.push_back({start[i], end[i]});
         }
-        sort(v.begin(), v.end(), myComp);
-        int cnt = 1;
-        int curr = v[0].second;
+        sort(v.begin(), v.end(), comp);
+        int cnt = 1, curr = v[0].second;
         for(int i=1;i<n;i++)
         {
             if(v[i].first > curr)
             {
-                cnt++;
                 curr = v[i].second;
+                cnt++;
             }
         }
         return cnt;
     }
-    
-    
 };
 
 // { Driver Code Starts.
