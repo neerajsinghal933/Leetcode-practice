@@ -14,38 +14,33 @@ class Solution{
         // Your code goes here
         vector<string>res;
         vector<vector<int>>vis(n, vector<int>(n, 0));
-        if(m[0][0]==0 or m[n-1][n-1]==0)
-        {
-            res.push_back("-1");
-            return res;
-        }
-        
-        fun(m, n, res, vis, 0, 0, "");
+        if(m[0][0] ==0 or m[n-1][n-1]==0)
+            return {};
+        fun(m, n, res, "", 0, 0, vis);
         return res;
     }
     
-    void fun(vector<vector<int>>&m, int n, vector<string>&res, vector<vector<int>>&vis, int i, int j, string t)
+    void fun(vector<vector<int>>&m, int n, vector<string>&res, string t, int x, int y, vector<vector<int>>&vis)
     {
-        if(i==n-1 and j==n-1)
-        {
-            // cout<<"YES";
-            res.push_back(t);
-            return ;
-        }
-        if(i<0 or i>=n or j<0 or j>=n)
-            return ;
-        
-        if(vis[i][j]==1)
+        if(x<0 or y<0 or x>=n or y>=n or vis[x][y]==1)
             return;
-        vis[i][j]=1;
-        if(m[i][j]==1)
+        if(x==n-1 and y==n-1)
         {
-            fun(m, n, res, vis, i+1, j, t + 'D');
-            fun(m, n, res, vis, i, j-1, t + 'L');
-            fun(m, n, res, vis, i, j+1, t + 'R');
-            fun(m, n, res, vis, i-1, j, t + 'U');
+            res.push_back(t);
+            return;
         }
-        vis[i][j] = 0;
+        vis[x][y]=1;
+        if(m[x][y])
+        {
+            vis[x][y] = 1;
+            fun(m, n, res, t + 'D', x+1, y, vis);
+            fun(m, n, res, t + 'L', x, y-1, vis);
+            fun(m, n, res, t + 'R', x, y+1, vis);
+            fun(m, n, res, t + 'U', x-1, y, vis);
+            
+        }
+        vis[x][y] = 0;
+        
     }
 };
 
