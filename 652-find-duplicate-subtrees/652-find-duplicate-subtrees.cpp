@@ -22,7 +22,7 @@ public:
     {
         if(!root)
             return "";
-        string s = to_string(root->val) + "r" + fun(root->right, res, m) + "l" + fun(root->left, res, m);
+        string s = to_string(root->val) + "l" + fun(root->left, res, m) + "r" + fun(root->right, res, m);
         m[s]++;
         if(m[s]==2)
             res.push_back(root);
