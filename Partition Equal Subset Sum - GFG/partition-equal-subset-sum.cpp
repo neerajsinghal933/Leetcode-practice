@@ -9,29 +9,26 @@ using namespace std;
 
 class Solution{
 public:
-    int equalPartition(int n, int arr[])
+    int equalPartition(int n, int a[])
     {
         // code here
         int sum = 0;
         for(int i=0;i<n;i++)
-            sum += arr[i];
+            sum += a[i];
         if(sum & 1)
             return 0;
-        sum /= 2;
-        return fun(n, arr, sum);
+        return fun(n-1, a, sum/2, 0);
     }
     
-    bool fun(int n, int arr[], int k)
+    bool fun(int n, int a[], int k, int curr)
     {
-        if(n==0 or k==0)
-        {
-            if(k==0)
-                return 1;
+        if(n==0 and k!=curr)
             return 0;
-        }
-        if(k-arr[n-1]>=0)
-            return fun(n-1, arr, k-arr[n-1]) or fun(n-1, arr, k);
-        return fun(n-1, arr, k);
+        if(k==curr)
+            return 1;
+        if(curr + a[n-1] <= k)
+            return fun(n-1, a, k, curr +a[n-1]) or fun(n-1, a, k, curr);
+        return fun(n-1, a, k, curr);
     }
 };
 
