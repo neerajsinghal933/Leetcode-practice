@@ -33,7 +33,7 @@ class Solution
                 int dist_uv = x[1];
                 if(dist[v] == INT_MAX or dist[v] >= d + dist_uv)
                 {
-                    dist[v] = dist[u] + dist_uv;
+                    dist[v] = d + dist_uv;
                     pq.push({dist[v], v});
                 }
             }
