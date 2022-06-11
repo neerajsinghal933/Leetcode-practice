@@ -3,50 +3,36 @@ public:
     typedef long long ll;
     int minOperations(vector<int>& nums, int x) {
         int n = nums.size();
-        vector<ll>v(n);
- 
-        unordered_map<ll, ll>m;
-        ll cnt = 0;
-        bool flag=0;
-        int i;
-        int ans = INT_MAX;
-        for(i=0;i<n;i++)
+        ll sum = 0;
+        for(int i:nums)
+            sum += i;
+        if(sum<x)
+            return -1;
+        ll t = sum - x;
+        int i=0, j=-1;
+        ll curr = 0;
+        int ans = 0;
+        // cout<<sum<<" "<<t;
+        if(t==0)
+            return n;
+        for(int j=0;j<n;j++)
         {
-            // cin>>v[i];
-            cnt += nums[i];
-            if(m[cnt]==0)
-                m[cnt]=i+1;
-            if(cnt==x){
-                ans = min(ans, i+1);
-                // cout<<ans<<" ";
-                flag=1;
+            // j++;
+            curr += nums[j];
+            while(i<n and curr>t)
+            {
+                curr -= nums[i];
+                i++;
+            }
+            if(curr==t)
+            {
+                // cout<<"k";
+                ans = max(ans, j-i+1);
+                // cout<<i<<" "<<j<<endl;
             }
         }
-        // if(flag)
-        // {
-        //     cout<<"YES\n";
-        //     return;
-        // }
-        cnt = 0;
-        for(i=n-1;i>=0;i--)
-        {
-            cnt += nums[i];
-            if(cnt==x)
-            {
-                ans = min(ans, n-i);
-                // cout<<ans<<"k ";
-                // cout<<"YES\n";return;
-            }
-            if(m[x-cnt]>0 and m[x-cnt] <= i)
-            {
-                int d = m[x-cnt];
-                ans = min(ans, n-i+d);
-                // cout<<ans<<"m ";
-                // cout<<"YES\n";
-                // return;
-            }
-        }
-        // cout<<"NO\n";return;
-        return ans==INT_MAX?-1:ans;
+        if(ans==0)
+            return -1;
+        return n-ans;
     }
 };
