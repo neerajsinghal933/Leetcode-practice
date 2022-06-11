@@ -1,20 +1,23 @@
 class Solution {
 public:
-    int longestCommonSubsequence(string s1, string s2) {
-        int n = s1.size();
-        int m = s2.size();
-        vector<vector<int>>dp(n+1, vector<int>(m+1, 0));
-        
-        for(int i=1;i<=n;i++)
-        {
-            for(int j=1;j<=m;j++)
-            {
-                if(s1[i-1]==s2[j-1])
-                    dp[i][j] = 1 + dp[i-1][j-1];
-                else
-                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-            }
-        }
-        return dp[n][m];
+     int t[1001][1001];
+    int lcs(string &a, string &b,int n,int m)
+    {
+        // if(n==0 || m==0)
+        //     return t[n][m] = 0;
+        if(n==0 or m==0)
+            return 0;
+        if(t[n][m]!=0)
+            return t[n][m];
+        if(a[n-1]==b[m-1])
+            return t[n][m]=1+lcs(a,b,n-1,m-1);
+        else
+            return t[n][m]=max(lcs(a,b,n-1,m),lcs(a,b,n,m-1));
+    }
+    int longestCommonSubsequence(string text1, string text2) 
+    {
+        int n=text1.size(),m=text2.size();
+        memset(t,0,sizeof(t));
+        return lcs(text1,text2,n,m);   
     }
 };
