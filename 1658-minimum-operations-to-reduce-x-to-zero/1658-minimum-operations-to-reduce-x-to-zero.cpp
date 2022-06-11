@@ -5,7 +5,7 @@ public:
         int n = nums.size();
         vector<ll>v(n);
  
-        map<ll, ll>m;
+        unordered_map<ll, ll>m;
         ll cnt = 0;
         bool flag=0;
         int i;
