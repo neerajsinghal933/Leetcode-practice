@@ -13,16 +13,15 @@ public:
             return 0;
         if(dp[idx][buy]!=-1)
             return dp[idx][buy];
-        int buyStock = INT_MIN;
-        int sellStock = INT_MIN;
+        // int buyStock = INT_MIN;
+        // int sellStock = INT_MIN;
         if(buy)
         {
-            buyStock = max(-v[idx] + fun(v, idx+1, !buy), fun(v, idx+1, buy));
+           return dp[idx][buy] = max(-v[idx] + fun(v, idx+1, !buy), fun(v, idx+1, buy));
         }
         else
         {
-            sellStock = max(v[idx] + fun(v, idx+2, !buy), fun(v, idx+1, buy));
+            return dp[idx][buy] = max(v[idx] + fun(v, idx+2, !buy), fun(v, idx+1, buy));
         }
-        return dp[idx][buy] = max(buyStock, sellStock);
     }
 };
