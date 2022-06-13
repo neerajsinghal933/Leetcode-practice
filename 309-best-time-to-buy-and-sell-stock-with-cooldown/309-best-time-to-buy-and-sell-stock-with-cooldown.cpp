@@ -2,27 +2,27 @@ class Solution {
 public:
     int dp[5001][2];
     int maxProfit(vector<int>& prices) {
+        int n = prices.size();
         memset(dp, -1, sizeof(dp));
-        return fun(0, 0, prices);
+        return fun(prices, 0, 1);
     }
     
-    int fun(int i, int buy, vector<int>&prices)
+    int fun(vector<int>&v, int idx, bool buy)
     {
-        if(i>=prices.size())
+        if(idx>=v.size())
             return 0;
-        if(dp[i][buy]!=-1)
-            return dp[i][buy];
+        if(dp[idx][buy]!=-1)
+            return dp[idx][buy];
         int buyStock = INT_MIN;
         int sellStock = INT_MIN;
-        
-        if(!buy)
+        if(buy)
         {
-            buyStock = max(-prices[i] + fun(i+1, 1, prices), fun(i+1, 0, prices));
+            buyStock = max(-v[idx] + fun(v, idx+1, !buy), fun(v, idx+1, buy));
         }
         else
         {
-            sellStock = max(prices[i] + fun(i+2, 0, prices), fun(i+1, 1, prices));
+            sellStock = max(v[idx] + fun(v, idx+2, !buy), fun(v, idx+1, buy));
         }
-        return dp[i][buy] = max(buyStock, sellStock);
+        return dp[idx][buy] = max(buyStock, sellStock);
     }
 };
