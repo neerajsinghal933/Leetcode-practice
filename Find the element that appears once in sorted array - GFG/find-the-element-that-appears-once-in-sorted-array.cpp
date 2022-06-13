@@ -35,7 +35,7 @@ class Solution
                     l = mid+1;
             }
         }
-        return 0;
+        return arr[l];
     }
 };
 
