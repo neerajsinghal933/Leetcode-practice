@@ -17,7 +17,7 @@ public:
         }
         if(idx==s.size())
             return;
-        s1 += s[idx];
+        s1.push_back(s[idx]);
         fun(s, s1, s2, idx+1);
         s1.pop_back();
         
@@ -28,14 +28,15 @@ public:
         fun(s, s1, s2, idx+1);
     }
     
-    bool isPalin(string s)
+    bool isPalin(string &s)
     {
-        int n = s.size();
-        for(int i=0;i<n/2;i++)
+        int i = 0, k = s.size()-1;
+        while(i < k)
         {
-            if(s[i]!=s[n-1-i])
+            if(s[i++] != s[k--])
                 return false;
         }
         return true;
+        
     }
 };
