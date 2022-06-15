@@ -10,6 +10,7 @@ public:
             else
             {
                 auto idx = lower_bound(v.begin(), v.end(), nums[i]);
+                // if(idx!=v.end())
                 *idx = nums[i];
             }
         }
