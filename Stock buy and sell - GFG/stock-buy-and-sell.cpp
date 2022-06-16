@@ -11,20 +11,20 @@ using namespace std;
 class Solution{
 public:
     //Function to find the days of buying and selling stock for max profit.
-    vector<vector<int> > stockBuySell(vector<int> v, int n){
+    vector<vector<int> > stockBuySell(vector<int> A, int n){
         // code here
         vector<vector<int>>ans;
         int i=0;
         while(i<n-1)
         {
-            while((i<n-1) and v[i+1]<=v[i])
+            while(i<n-1 and A[i+1]<=A[i])
                 i++;
             if(i==n-1)
                 break;
             int buy = i++;
-            while((i<n) and v[i]>=v[i-1])
+            while(i<n and A[i]>=A[i-1])
                 i++;
-            int sell = i-1;
+            int sell  = i-1;
             ans.push_back({buy, sell});
         }
         return ans;
