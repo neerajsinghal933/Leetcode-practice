@@ -10,35 +10,26 @@ using namespace std;
 class Solution
 {
     public:
-    int fun(int n, int x, int y, int z, vector<int>&dp)
-    {
-        dp[0] = 0;
-        for(int i=0;i<=n;i++)
-        {
-            if(dp[i]==-1)
-                continue;
-            if(i+x<=n)
-                dp[i+x] = max(dp[i+x], 1 + dp[i]);
-            if(i+y<=n)
-                dp[i+y] = max(dp[i+y], 1 + dp[i]);
-            if(i+z<=n)
-                dp[i+z] = max(dp[i+z], 1 + dp[i]);
-            
-                
-        }
-        if(dp[n]==-1)
-            dp[n] = 0;
-        return dp[n];
-        
-    }
-    
-    
     //Function to find the maximum number of cuts.
     int maximizeTheCuts(int n, int x, int y, int z)
     {
         //Your code here
         vector<int>dp(n+1, -1);
-        return fun(n, x, y, z, dp);
+        dp[0] = 0;
+        for(int i=1;i<=n;i++)
+        {
+            int t = dp[i];
+            if(i-x>=0 and dp[i-x]!=-1)
+                t = max(t, 1 + dp[i-x]);
+                
+            if(i-y>=0 and dp[i-y]!=-1)
+                t = max(t, 1 + dp[i-y]);
+                
+            if(i-z>=0 and dp[i-z]!=-1)
+                t = max(t, 1 + dp[i-z]);
+            dp[i] = t;
+        }
+        return dp[n]==-1?0:dp[n];
     }
 };
 
