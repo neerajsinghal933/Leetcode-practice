@@ -1,6 +1,6 @@
 class Solution {
 public:
-    static bool comp(string a, string b)
+    static bool comp(string &a, string &b)
     {
         return a+b>b+a;
 }
