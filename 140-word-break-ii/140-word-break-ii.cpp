@@ -2,9 +2,8 @@ class Solution {
 public:
     vector<string> wordBreak(string s, vector<string>& wordDict) {
         vector<string>res;
-        string temp = "";
-        int n = wordDict.size();
-         fun(s, wordDict, "", res);
+        
+        fun(s, wordDict, "", res);
         return res;
     }
     
@@ -20,11 +19,10 @@ public:
                 {
                     temp += t;
                     res.push_back(temp);
-                    
+                    // return;
                 }
                 fun(s.substr(i, sz-1), wordDict, temp + t + " ", res);
             }
         }
-        
     }
 };
