@@ -17,8 +17,8 @@ public:
             return NULL;
         
         ListNode* c = lists[0];
-        if(n==1)
-            return c;
+        // if(n==1)
+        //     return c;
         ListNode* ans = c;
         
         for(int i=0;i<n-1;i++)
