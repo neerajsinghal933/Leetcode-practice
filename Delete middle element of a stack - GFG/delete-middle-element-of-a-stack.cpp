@@ -11,7 +11,7 @@ class Solution
 {
     public:
     //Function to delete middle element of a stack.
-    int flag=0;
+    // int flag=0;
     void deleteMid(stack<int>&s, int sizeOfStack)
     {
         // code here..
@@ -22,7 +22,7 @@ class Solution
             s.pop();
             return;
         }
-        if(!flag and n>k)
+        if( n>k)
         {
             int t = s.top();
             s.pop();
