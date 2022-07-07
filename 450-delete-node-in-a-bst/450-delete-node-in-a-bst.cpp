@@ -41,20 +41,20 @@ public:
             delete root;
             return temp;
         }
-        TreeNode* succ = root->right;
+        TreeNode* succ = root->left;
         TreeNode* par = root;
-        while(succ->left != NULL)
+        while(succ->right != NULL)
         {
             par = succ;
-            succ = succ->left;
+            succ = succ->right;
         }
         if(root!=par)
         {
-            par->left = succ->right;
+            par->right = succ->left;
         }
         else
         {
-            par->right = succ->right;
+            par->left = succ->left;
         }
         root->val = succ->val;
         delete succ;
