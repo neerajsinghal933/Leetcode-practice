@@ -12,35 +12,29 @@ class Solution{
     public:
     vector<string> findPath(vector<vector<int>> &m, int n) {
         // Your code goes here
+        if(m[0][0]==0 or m[n-1][n-1]==0)
+            return {"-1"};
         vector<string>res;
         vector<vector<int>>vis(n, vector<int>(n, 0));
-        if(m[0][0] ==0 or m[n-1][n-1]==0)
-            return {};
-        fun(m, n, res, "", 0, 0, vis);
+        fun(m, n, vis, res, 0, 0, "");
         return res;
     }
     
-    void fun(vector<vector<int>>&m, int n, vector<string>&res, string t, int x, int y, vector<vector<int>>&vis)
+    void fun(vector<vector<int>>&m, int n, vector<vector<int>>&vis, vector<string>&res, int x, int y, string temp)
     {
-        if(x<0 or y<0 or x>=n or y>=n or vis[x][y]==1)
-            return;
         if(x==n-1 and y==n-1)
         {
-            res.push_back(t);
+            res.push_back(temp);
+            return ;
+        }
+        if(x<0 or y<0 or x>=n or y>=n or vis[x][y] or m[x][y]==0)
             return;
-        }
-        vis[x][y]=1;
-        if(m[x][y])
-        {
-            vis[x][y] = 1;
-            fun(m, n, res, t + 'D', x+1, y, vis);
-            fun(m, n, res, t + 'L', x, y-1, vis);
-            fun(m, n, res, t + 'R', x, y+1, vis);
-            fun(m, n, res, t + 'U', x-1, y, vis);
-            
-        }
-        vis[x][y] = 0;
-        
+        vis[x][y] = true;
+        fun(m, n, vis, res, x+1, y, temp + "D");
+        fun(m, n, vis, res, x, y-1, temp + "L");
+        fun(m, n, vis, res, x, y+1, temp + "R");
+        fun(m, n, vis, res, x-1, y, temp + "U");
+        vis[x][y] = false;
     }
 };
 
