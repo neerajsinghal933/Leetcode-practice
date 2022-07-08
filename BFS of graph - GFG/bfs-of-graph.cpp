@@ -10,25 +10,21 @@ class Solution {
         // Code here
         queue<int>q;
         q.push(0);
-        vector<int>ans;
         vector<int>vis(v, 0);
-        vis[0]=1;
+        vis[0] = 1;
+        vector<int>ans;
         while(!q.empty())
         {
-            int sz = q.size();
-            for(int i=0;i<sz;i++)
+            int t = q.front();
+            ans.push_back(t);
+            q.pop();
+            for(int x:adj[t])
             {
-                int t = q.front();
-                
-                q.pop();
-                for(int j=0;j<adj[t].size();j++)
+                if(!vis[x])
                 {
-                    if(!vis[adj[t][j]]){
-                        q.push(adj[t][j]);
-                        vis[adj[t][j]]=1;
-                    }
+                    vis[x]=1;
+                    q.push(x);
                 }
-                ans.push_back(t);
             }
         }
         return ans;
