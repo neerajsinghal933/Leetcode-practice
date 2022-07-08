@@ -13,26 +13,25 @@ class Solution {
         {
             if(!vis[i])
             {
-                bool c = solve(adj, -1, i, vis);
-                if(c)
-                return true;
+                if(dfs(adj, vis, -1, i))
+                    return true;
             }
         }
         return false;
     }
     
-    bool solve(vector<int>adj[], int par, int src, vector<int>&vis)
+    bool dfs(vector<int>adj[], vector<int>&vis, int par, int src)
     {
-        vis[src] = 1;
-        for(auto x:adj[src])
+        vis[src] =1;
+        for(int x:adj[src])
         {
             if(!vis[x])
             {
-                if(solve(adj, src, x, vis)==true)
-                return true;
+                if(dfs(adj, vis, src, x))
+                    return true;
             }
-            else if(x!=par)
-            return true;
+            else if(par!=x)
+                return true;
         }
         return false;
     }
