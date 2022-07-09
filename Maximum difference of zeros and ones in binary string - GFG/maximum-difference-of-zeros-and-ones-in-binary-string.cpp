@@ -7,28 +7,21 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:	
-	int maxSubstring(string S)
+	int maxSubstring(string s)
 	{
 	    // Your code goes here
-	    int sum = 0, x;
+	    int sum = 0;
 	    int ans = INT_MIN;
-	    for(char c:S)
+	    for(char c:s)
 	    {
-	        if(c=='0'){
-	            x=1;
-	        }
-	         else
-	         {
-	            x=-1;
-	         }
+	        int x = -1;
+	        if(c=='0')
+	            x = 1;
 	         sum += x;
-	         ans = max(ans, sum);
+	         ans = max(sum, ans);
 	         if(sum<0)
-	            sum=0;
-	         
+	            sum = 0;
 	    }
-	   // if(!flag1 or !flag2)
-	   //     return 0;
 	    return ans;
 	}
 };
