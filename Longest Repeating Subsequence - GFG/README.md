@@ -1,17 +1,19 @@
 # Longest Repeating Subsequence
 ##  Easy 
 <div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given a string str, find the length of the longest repeating subsequence such that it can be found twice in the given string. The two identified subsequences A and B can use the same ith character from string str if and only if that ith character has different indices in A and B.</span></p>
+                <p></p><p><span style="font-size:18px">Given string str, find the length of the longest repeating subsequence such that it can be found twice in the given string. </span></p>
+
+<p><span style="font-size:18px">The two identified subsequences A and B can use the same ith character from string str if and only if that ith character has different indices in A and B. For example, A = "xax" and B = "xax" then the index of first "x" must be different in the original string for A and B.</span></p>
 
 <p><strong><span style="font-size:18px">Example 1:</span></strong></p>
 
 <pre><span style="font-size:18px"><strong>Input:</strong>
-str = "axxxy"
+str = "axxzxy"
 <strong>Output:</strong> 2
 <strong>Explanation:</strong>
 The given array with indexes looks like
-a x x x y 
-0 1 2 3 4</span>
+a x x z x y 
+0 1 2 3 4 5</span>
 
 <span style="font-size:18px">The longest subsequence is "xx". 
 It appears twice as explained below.</span>
@@ -27,7 +29,7 @@ subsequence B</strong>
 x x
 0 1  &lt;-- index of subsequence B
 ------
-2 3  &lt;-- index of str </span>
+2 4  &lt;-- index of str </span>
 
 <span style="font-size:18px">We are able to use character 'x' 
 (at index 2 in str) in both subsequences
@@ -37,10 +39,33 @@ and index 0 in subsequence B.</span></pre>
 <p><strong><span style="font-size:18px">Example 2:</span></strong></p>
 
 <pre><span style="font-size:18px"><strong>Input:</strong>
-str = "aab"
-<strong>Output:</strong> 1
-<strong>Explanation: </strong>
-The longest reapting subsequenece is "a".</span></pre>
+str = "axxxy"
+<strong>Output:</strong> 2
+<strong>Explanation:</strong>
+The given array with indexes looks like
+a x x x y&nbsp;
+0 1 2 3 4
+
+The longest subsequence is "xx".&nbsp;
+It appears twice as explained below.
+
+<strong>subsequence A</strong>
+x x
+0 1 &nbsp;&lt;-- index of subsequence A
+------
+1 2 &nbsp;&lt;-- index of str&nbsp;
+
+
+<strong>subsequence B</strong>
+x x
+0 1 &nbsp;&lt;-- index of subsequence B
+------
+2 3 &nbsp;&lt;-- index of str&nbsp;
+
+We are able to use character 'x'&nbsp;
+(at index 2 in str) in both subsequences
+as it appears on index 1 in subsequence A&nbsp;
+and index 0 in subsequence B.</span></pre>
 
 <p><br>
 <span style="font-size:18px"><strong>Your Task:</strong><br>
