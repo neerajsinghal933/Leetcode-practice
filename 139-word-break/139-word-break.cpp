@@ -1,18 +1,16 @@
 class Solution {
 public:
-    bool wordBreak(string s, vector<string>& wordDict) {
+    bool wordBreak(string s, vector<string>& v) {
         int n = s.size();
-        int dp[n+1];
-        memset(dp, 0, sizeof(dp));
+        vector<bool>dp(n+1, false);
         dp[n] = 1;
         for(int i=n-1;i>=0;i--)
         {
-            string temp = "";
-            for(int k=i; k<n; k++)
+            string t = "";
+            for(int k=i;k<n;k++)
             {
-                temp += s[k];
-                auto it = find(wordDict.begin(), wordDict.end(), temp);
-                if(it!=wordDict.end() and dp[k+1]==1)
+                t += s[k];
+                if(find(v.begin(), v.end(), t)!=v.end() and dp[k+1]==1)
                     dp[i] = 1;
             }
         }
