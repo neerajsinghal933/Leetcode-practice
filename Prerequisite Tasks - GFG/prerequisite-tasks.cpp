@@ -5,42 +5,37 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-    bool isCycle(int src, vector<int>&order, vector<int>adj[], vector<int>&vis)
-    {
-        vis[src]=1;
-        order[src]=1;
-        for(auto it:adj[src])
-        {
-            if(!vis[it])
-            {
-                if(isCycle(it, order, adj, vis)==true)
-                    return true;
-            }
-            else if(order[it]==1)
-                return true;
-        }
-        order[src]=0;
-        return false;
-    }
-
-	bool isPossible(int n, vector<pair<int, int> >& v) {
+	bool isPossible(int n, vector<pair<int, int> >& p) {
 	    // Code here
-	    vector<int>adj[n];
-	    for(auto it:v)
+	    vector<vector<int>>adj(n);
+	    vector<int>in(n, 0);
+	    for(int i=0;i<p.size();i++)
 	    {
-	        adj[it.second].push_back(it.first);
+	        int a = p[i].first;
+	        int b = p[i].second;
+	        adj[b].push_back(a);
+	        in[a]++;
 	    }
-	    vector<int>vis(n, 0);
-	    vector<int>order(n, 0);
+	    queue<int>q;
 	    for(int i=0;i<n;i++)
 	    {
-	        if(!vis[i])
+	        if(in[i]==0)
+	            q.push(i);
+	    }
+	    int c =0;
+	    while(!q.empty())
+	    {
+	        int t = q.front();
+	        q.pop();
+	        c++;
+	        for(int x:adj[t])
 	        {
-	            if(isCycle(i, order, adj, vis))
-	                return false;
+	            in[x]--;
+	            if(in[x]==0)
+	                q.push(x);
 	        }
 	    }
-	    return true;
+	    return c==n;
 	}
 };
 
