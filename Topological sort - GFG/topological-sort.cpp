@@ -8,6 +8,18 @@ class Solution
 	public:
 	//Function to return list containing vertices in Topological order. 
 	stack<int>st;
+	
+	void dfs(int src, vector<int>&vis, vector<int>adj[])
+	{
+	    vis[src] = 1;
+	    for(int x:adj[src])
+	    {
+	        if(!vis[x])
+	            dfs(x, vis, adj);
+	    }
+	    st.push(src);
+	}
+	
 	vector<int> topoSort(int v, vector<int> adj[]) 
 	{
 	    // code here
@@ -15,26 +27,16 @@ class Solution
 	    for(int i=0;i<v;i++)
 	    {
 	        if(!vis[i])
-	            dfs(vis, adj, i);
+	            dfs(i, vis, adj);
 	    }
-	    vector<int>res;
-	    while(!st.empty())
+	    vector<int>ans;
+	    while(st.size())
 	    {
-	        res.push_back(st.top());
+	        ans.push_back(st.top());
 	        st.pop();
 	    }
-	    return res;
-	}
-	
-	void dfs(vector<int>&vis, vector<int>adj[], int src)
-	{
-	    vis[src] = 1;
-	    for(auto x:adj[src])
-	    {
-	        if(!vis[x])
-	            dfs(vis, adj, x);
-	    }
-	    st.push(src);
+	   // reverse(ans.begin(), ans.end());
+	    return ans;
 	}
 };
 
