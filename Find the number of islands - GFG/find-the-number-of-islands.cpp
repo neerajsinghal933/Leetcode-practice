@@ -6,40 +6,44 @@ using namespace std;
 class Solution {
   public:
     // Function to find the number of islands.
+    vector<vector<int>>dir = {{1, 0}, {1, 1}, {1, -1}, {-1, 0},{-1, 1}, {-1, -1}, {0, 1}, {0, -1}};
     
     bool isSafe(int x, int y, vector<vector<int>>&vis, vector<vector<char>>&grid)
     {
-        if(x>=0 and y>=0 and x<grid.size() and y<grid[0].size() and !vis[x][y] and grid[x][y]=='1')
-            return true;
+        int n = grid.size();
+        int m = grid[0].size();
+        if(x<0 or x>=n or y<0 or y>=m or grid[x][y]=='0' or vis[x][y])
             return false;
+        return true;
     }
     
     void dfs(int x, int y, vector<vector<int>>&vis, vector<vector<char>>&grid)
     {
-        vis[x][y] = true;
-        vector<int>dirX = {1, 1, 1, 0, 0, -1, -1, -1};
-        vector<int>dirY = {1, 0, -1, 1, -1, 1, 0, -1};
+        vis[x][y] = 1;
         for(int i=0;i<8;i++)
         {
-            if(isSafe(x+dirX[i], y+dirY[i], vis, grid)==true)
-                dfs(x+dirX[i], y+dirY[i], vis, grid);
+            int cx = x + dir[i][0];
+            int cy = y + dir[i][1];
+            if(isSafe(cx, cy, vis, grid)==true)
+            {
+                dfs(cx, cy, vis, grid);
+            }
         }
     }
     
     int numIslands(vector<vector<char>>& grid) {
         // Code here
-        
         int n = grid.size();
         int m = grid[0].size();
+        
         vector<vector<int>>vis(n, vector<int>(m, 0));
-        int cnt=0;
+        int cnt = 0;
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(grid[i][j]=='1' and vis[i][j]==0)
+                if(grid[i][j]=='1' and !vis[i][j])
                 {
-                    // cout<<"k";
                     cnt++;
                     dfs(i, j, vis, grid);
                 }
