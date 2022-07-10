@@ -12,31 +12,30 @@ class Solution
     {
         // Code here
         vector<int>dist(v, INT_MAX);
-        vector<bool>vis(v, false);
+        vector<int>vis(v, 0);
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
-        
-        // vis[src] = 1;
-        dist[src] = 0;
         pq.push({0, src});
+        dist[src] = 0;
+        
         while(!pq.empty())
         {
+            int dist_u = pq.top().first;
             int u = pq.top().second;
-            int d = pq.top().first;
             pq.pop();
-            if(vis[u]==true)
+            if(vis[u])
                 continue;
-            vis[u] = true;
-            
+            vis[u]  =1;
             for(auto x:adj[u])
             {
                 int v = x[0];
-                int dist_uv = x[1];
-                if(dist[v] == INT_MAX or dist[v] >= d + dist_uv)
+                int d = x[1];
+                if(dist[v]>=d+dist_u)
                 {
-                    dist[v] = d + dist_uv;
+                    dist[v] = d + dist_u;
                     pq.push({dist[v], v});
                 }
             }
+            
         }
         return dist;
     }
