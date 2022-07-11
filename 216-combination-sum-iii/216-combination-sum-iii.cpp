@@ -7,10 +7,11 @@ public:
             res.push_back(temp);return;
         }
         if(n<0 || temp.size()>k || i>9) return;
+        fun(k, n, i+1, temp, res);
         temp.push_back(i);
         fun(k, n-i, i+1, temp, res);
-        temp.pop_back();
-        fun(k, n, i+1, temp, res);
+        // temp.pop_back();
+        
         
     }
     
