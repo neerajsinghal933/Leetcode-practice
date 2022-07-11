@@ -6,7 +6,7 @@ public:
         queue<int>q;
         q.push(1);
         vis[1] = 1;
-        int cnt = 0;
+        int cnt =0 ;
         while(!q.empty())
         {
             cnt++;
@@ -17,23 +17,16 @@ public:
                 q.pop();
                 for(int k=1;k<=6;k++)
                 {
-                    // cout<<k<<" ";
                     int d = t + k;
                     if(d>n*n)
-                    {
-                        // cout<<"m";
                         break;
-                    }
-                    // cout <<d<<" ";
                     if(vis[d]==1)
                         continue;
                     vis[d] = 1;
                     d = fun(board, n, d);
-                    // cout << d;
                     if(d==n*n)
                         return cnt;
                     q.push(d);
-                    // cout<<"p";
                 }
             }
         }
