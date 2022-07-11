@@ -1,5 +1,5 @@
 # Minimum Cost to cut a board into squares
-## Hard 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">A board of length <strong>M</strong>&nbsp;and width <strong>N</strong>&nbsp;is given.&nbsp;The task is&nbsp;to break this board into <strong>M * N</strong>&nbsp;squares such that cost of breaking is minimum. The cutting cost for each edge will be given for the board in two arrays <strong>X[]</strong>&nbsp;and <strong>Y[]</strong>. In short, you&nbsp;need to choose such a sequence of cutting such that cost is minimized. Return the minimized cost.</span></p>
 
