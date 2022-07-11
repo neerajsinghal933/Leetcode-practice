@@ -12,15 +12,15 @@ class Solution {
   public:
     //Function to return a list of indexes denoting the required 
     //combinations whose sum is equal to given number.
-    set<vector<int>>st;
+    // set<vector<int>>st;
     vector<vector<int> > combinationSum(vector<int> &a, int b) {
         // Your code here
         vector<vector<int>>res;
         vector<int>temp;
         sort(a.begin(), a.end(), greater<int>());
         fun(a, b, temp, res, a.size());
-        for(auto x:st)
-            res.push_back(x);
+        // for(auto x:st)
+        //     res.push_back(x);
         return res;
     }
     
@@ -29,7 +29,7 @@ class Solution {
         if(n==0 or b==0)
         {
             if(b==0)
-                st.insert(temp);
+                res.push_back(temp);
             return;
         }
         if(a[n-1]<=b)
