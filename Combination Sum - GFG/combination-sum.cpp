@@ -12,45 +12,43 @@ class Solution {
   public:
     //Function to return a list of indexes denoting the required 
     //combinations whose sum is equal to given number.
-    map<vector<int>, int>m;
+    set<vector<int>>st;
     vector<vector<int> > combinationSum(vector<int> &a, int b) {
         // Your code here
-        int n = a.size();
-        sort(a.begin(), a.end());
-        auto ip = std::unique(a.begin(), a.begin() + n);
-        a.resize(std::distance(a.begin(), ip));
-        n = a.size();
-        vector<vector<int>>ans;
+        vector<vector<int>>res;
         vector<int>temp;
-        fun(a, b, temp, ans, 0);
-        return ans;
+        sort(a.begin(), a.end(), greater<int>());
+        fun(a, b, temp, res, a.size());
+        for(auto x:st)
+            res.push_back(x);
+        return res;
     }
     
-    void fun(vector<int>&a, int b, vector<int>temp, vector<vector<int>>&ans, int idx)
+    void fun(vector<int>&a, int b, vector<int>temp, vector<vector<int>>&res, int n)
     {
-        if(idx>=a.size() and b==0)
+        if(n==0 or b==0)
         {
-            if(m[temp]==0)
-                ans.push_back(temp);
-            m[temp]++;
+            if(b==0)
+                st.insert(temp);
             return;
         }
-        if(b==0)
+        if(a[n-1]<=b)
         {
-            if(m[temp]==0)
-                ans.push_back(temp);
-            m[temp]++;
-            return;
-        }
-        if(idx>=a.size())
-            return;
-        if(b-a[idx]>=0)
-        {
-            temp.push_back(a[idx]);
-            fun(a, b-a[idx], temp, ans, idx);
+            temp.push_back(a[n-1]);
+            fun(a, b-a[n-1], temp, res, n);
             temp.pop_back();
         }
-        fun(a, b, temp, ans, idx+1);
+        else
+            return;
+        int k;
+        for(k = n-1;k>0;k--)
+        {
+            if(a[k]==a[k-1])
+                n = k-1;
+            else
+                break;
+        }
+        fun(a, b, temp, res, k);
     }
 };
 
