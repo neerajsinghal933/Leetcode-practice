@@ -31,7 +31,7 @@ class Solution
                 {
                     int v = x.first;
                     int dst = x.second;
-                    if(dist[u]!=INT_MIN and dist[v]<d + dst)
+                    if(dist[u]!=INT_MIN and dist[v]<dist[u] + dst)
                     {    
                         dist[v] = d + dst;
                         pq.push({dist[v], v});
