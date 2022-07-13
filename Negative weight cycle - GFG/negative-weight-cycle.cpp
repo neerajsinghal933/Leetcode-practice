@@ -10,18 +10,18 @@ public:
 	    vector<int>dist(n, INT_MAX);
 	    int src = 0;
 	    dist[src] = 0;
-	    for(int i=1;i<=n;i++)
+	    for(int i=0;i<n;i++)
 	    {
 	        bool flag = false;
 	        for(auto x:edges)
 	        {
 	            int u = x[0];
 	            int v = x[1];
-	            int d = x[2];
-	            if(dist[u]!=INT_MAX and dist[u] + d < dist[v])
+	            int w = x[2];
+	            if(dist[u]!=INT_MAX and dist[v]>w+dist[u])
 	            {
 	                flag = true;
-	                dist[v] = dist[u] + d;
+	                dist[v] = dist[u] + w;
 	            }
 	        }
 	        if(!flag)
