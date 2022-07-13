@@ -9,7 +9,6 @@ public:
 	    // Code here
 	    vector<int>col(v, -1);
 	    queue<pair<int, int>>q;
-	    
 	    for(int i=0;i<v;i++)
 	    {
 	        if(col[i]==-1)
@@ -28,12 +27,11 @@ public:
 	                    if(col[x]==-1)
 	                    {
 	                        col[x] = !c;
-	                        q.push({x, col[x]});
+	                        q.push({x, !c});
 	                    }
 	                }
 	            }
 	        }
-	        
 	    }
 	    return true;
 	}
