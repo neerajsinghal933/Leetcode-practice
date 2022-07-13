@@ -14,9 +14,17 @@ class Solution {
         return par[x] = find_set(par[x], par);
     }
     
-    int union_set(int x, int y, vector<int>&par)
+    int union_set(int x, int y, vector<int>&par, vector<int>&rank)
     {
-        par[x] = y;
+        if(rank[x]<rank[y])
+        {
+            par[x] = y;
+            rank[y] += rank[x];
+        }
+        else{
+            par[y] = x;
+            rank[x] += rank[y];
+        }
         // par[y] = x;
         // int s1 = find_set(x, par);
         // int s2 = find_set(y, par);
@@ -30,6 +38,7 @@ class Solution {
     bool isCycle(int v, vector<int> adj[]) {
         // Code here
         vector<int>par(v, -1);
+        vector<int>rank(v, 1);
         for(int i=0;i<v;i++)
         {
             for(int x:adj[i])
@@ -39,7 +48,7 @@ class Solution {
                 int s1 = find_set(i, par);
                 int s2 = find_set(x, par);
                 if(s1!=s2)
-                    union_set(s1, s2, par);
+                    union_set(s1, s2, par, rank);
                 else
                     return true;
                 }
