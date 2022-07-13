@@ -1,42 +1,33 @@
 class Solution {
 public:
+    typedef vector<int> vi;
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
-        vector<pair<int, int>>adj[n];
-        for(auto x:flights)
-        {
+        vector<pair<int, int>> adj[n];
+        for(auto x : flights)
             adj[x[0]].push_back({x[1], x[2]});
-        }
-        int steps = 0, res = INT_MAX;
-        queue<pair<int, int>>q; //dest, cost
-        
-        q.push({src, 0});
-        vector<int>vis(n, 0);
-        while(!q.empty())
+        priority_queue<vi, vector<vi>, greater<vi>> pq;
+        vector<int> start = {0, src, k+1};
+        pq.push(start);
+        vector<vector<bool>> visited(n, vector<bool>(k+2, false));
+        while(!pq.empty())
         {
-            int sz = q.size();
-            for(int i=0;i<sz;i++)
+            vector<int> v = pq.top();
+            pq.pop();
+            if(visited[v[1]][v[2]])
+                continue;
+            visited[v[1]][v[2]] = true;
+            // cout<<v[1]<<" "<<v[0]<<" "<<v[2]<<endl;
+            if(v[1] == dst)
+                return v[0];
+            if(v[2] == 0)
+                continue;
+            for(auto x : adj[v[1]])
             {
-                int u = q.front().first;
-                int cost = q.front().second;
-                q.pop();
-                
-                if(u==dst)
-                {
-                    res = min(res, cost);
-                }
-                
-                for(auto x:adj[u])
-                {
-                    if(cost + x.second <= res and (vis[x.first]==0 or cost + x.second < vis[x.first]))
-                    {
-                        vis[x.first] = cost + x.second;
-                        q.push({x.first,cost+ x.second});
-                    }
-                }
+                int newPt = x.first;
+                int newd = x.second;
+                pq.push({v[0] + newd, newPt, v[2] - 1});
             }
-            if(steps++ >k)
-                break;
         }
-        return res==INT_MAX?-1:res;
+        return -1;
     }
 };
