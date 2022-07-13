@@ -11,7 +11,7 @@ class Solution {
     {
         if(par[x]==-1)
             return x;
-        return find_set(par[x], par);
+        return par[x] = find_set(par[x], par);
     }
     
     int union_set(int x, int y, vector<int>&par)
