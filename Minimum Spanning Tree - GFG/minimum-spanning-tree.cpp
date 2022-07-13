@@ -9,56 +9,28 @@ class Solution
 {
 	public:
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
-	static bool comp(vector<int>&a, vector<int>&b)
-	{
-	    return a[2]<b[2];
-	}
-	
-	int find_set(int x, vector<int>&par)
-    {
-        if(par[x]==-1)
-            return x;
-        return par[x] = find_set(par[x], par);
-    }
-    
-    int union_set(int x, int y, vector<int>&par, vector<int>&rank)
-    {
-        if(rank[x]<rank[y])
-        {
-            par[x] = y;
-            rank[y] += rank[x];
-        }
-        else{
-            par[y] = x;
-            rank[x] += rank[y];
-        }
-    }
-	
     int spanningTree(int v, vector<vector<int>> adj[])
     {
         // code here
-        vector<vector<int>>graph;
-        for(int i=0;i<v;i++)
-        {
-            for(auto x:adj[i])
-            {
-                graph.push_back({i, x[0], x[1]});
-            }
-        }
-        sort(graph.begin(), graph.end(), comp);
-        vector<int>par(v, -1), rank(v, 1);
+        vector<int>vis(v, 0);
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>q;
         int ans = 0;
-        for(int i=0;i<graph.size();i++)
+        q.push({0, 0}); // weight, node
+        while(!q.empty())
         {
-            int u = graph[i][0];
-            int v = graph[i][1];
-            int d = graph[i][2];
-            int s1 = find_set(u, par);
-            int s2 = find_set(v, par);
-            if(s1!=s2)
+            int u = q.top().second;
+            int w = q.top().first;
+            q.pop();
+            if(vis[u])
+                continue;
+            ans += w;
+            vis[u] = 1;
+            for(auto x:adj[u])
             {
-                ans += d;
-                union_set(s1, s2, par, rank);
+                if(vis[x[0]]==0)
+                {
+                    q.push({x[1], x[0]});
+                }
             }
         }
         return ans;
