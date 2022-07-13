@@ -25,8 +25,8 @@ class Solution
                 int u = pq.top().second;
                 int d = pq.top().first;
                 pq.pop();
-                if(dist[u]>d)
-                    continue;
+                // if(dist[u]>d)
+                //     continue;
                 for(auto x:adj[u])
                 {
                     int v = x.first;
