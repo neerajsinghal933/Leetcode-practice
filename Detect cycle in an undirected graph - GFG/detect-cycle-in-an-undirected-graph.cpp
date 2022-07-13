@@ -6,34 +6,47 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in an undirected graph.
-    bool isCycle(int v, vector<int> adj[]) {
-        // Code here
-        vector<int>vis(v, 0);
-        for(int i=0;i<v;i++)
-        {
-            if(!vis[i])
-            {
-                if(dfs(adj, vis, -1, i))
-                    return true;
-            }
-        }
-        return false;
+    
+    int find_set(int x, vector<int>&par)
+    {
+        if(par[x]==-1)
+            return x;
+        return find_set(par[x], par);
     }
     
-    bool dfs(vector<int>adj[], vector<int>&vis, int par, int src)
+    int union_set(int x, int y, vector<int>&par)
     {
-        vis[src] =1;
-        for(int x:adj[src])
+        par[x] = y;
+        // par[y] = x;
+        // int s1 = find_set(x, par);
+        // int s2 = find_set(y, par);
+        // if(s1!=s2)
+        // {
+        //     par[s1] = s2;
+        //     // par[s2] = s1;
+        // }
+    }
+    
+    bool isCycle(int v, vector<int> adj[]) {
+        // Code here
+        vector<int>par(v, -1);
+        for(int i=0;i<v;i++)
         {
-            if(!vis[x])
+            for(int x:adj[i])
             {
-                if(dfs(adj, vis, src, x))
+                if(x>i)
+                {
+                int s1 = find_set(i, par);
+                int s2 = find_set(x, par);
+                if(s1!=s2)
+                    union_set(s1, s2, par);
+                else
                     return true;
+                }
             }
-            else if(par!=x)
-                return true;
         }
         return false;
+        
     }
 };
 
