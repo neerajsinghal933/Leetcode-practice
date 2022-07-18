@@ -19,19 +19,7 @@ public:
                     break;
             }
             swap(nums[i], nums[j]);
-            reverse(nums.begin() + i + 1, nums.end());
+            sort(nums.begin()+i+1, nums.end());
         }
     }
 };
-
-// 1 2 3
-    
-//     3 2 1
-//     1 2  3
-    
-//     1 2 4 5 4 3 2
-//     1 2 5 4 4 3 2
-    
-//     1 2 5 2 3 4 4
-    
-//     1 2 5 2 3 4 4
