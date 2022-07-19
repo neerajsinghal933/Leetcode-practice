@@ -12,17 +12,19 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
-        if(!root)
-            return true;
-        return fun(root, root);
+        
+        return fun(root->left, root->right);// and isSymmetric(root->left) and isSymmetric(root->right) ;
     }
     
-    bool fun(TreeNode* l, TreeNode* r)
+    bool fun(TreeNode* root1, TreeNode* root2)
     {
-        if(!l or !r)
-            return !l && !r;
-        if(l->val != r->val)
-            return 0;
-        return fun(l->left, r->right) and fun(l->right, r->left);
+        if(!root1 or !root2)
+        {
+            if(!root1 and !root2)
+                return true;
+            return false;
+        }
+            // return true
+        return root1->val == root2->val and fun(root1->left, root2->right) and fun(root1->right, root2->left);
     }
 };
