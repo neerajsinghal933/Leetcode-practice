@@ -6,24 +6,24 @@ public:
         if(sum & 1)
             return 0;
         sum /= 2;
-        return fun(nums, sum, n);
+        vector<vector<int>>dp(n+1, vector<int>(sum+1, -1));
+        return fun(nums, sum, n, dp);
     }
     
-    bool fun(vector<int>&nums, int k, int n)
+    bool fun(vector<int>&nums, int k, int n, vector<vector<int>>&dp)
     {
-        vector<vector<bool>>dp(n+1, vector<bool>(k+1, false));
-        for(int i=0;i<=n;i++)
-            dp[i][0] = true;
-        for(int i=1;i<=n;i++)
+        if(n==0)
         {
-            for(int j=1;j<=k;j++)
-            {
-                if(nums[i-1]<=j)
-                    dp[i][j] = dp[i-1][j] or dp[i-1][j-nums[i-1]];
-                else
-                    dp[i][j] = dp[i-1][j];// or dp[i-1][nums[i-1]-j];
-            }
+            if(k==0)
+                return true;
+            return false;
         }
-        return dp[n][k];
+        if(dp[n][k]!=-1)
+            return dp[n][k];
+        bool flag = false;
+        flag = fun(nums, k, n-1, dp);
+        if(k>=nums[n-1])
+            flag = flag or fun(nums, k - nums[n-1], n-1, dp);
+        return dp[n][k] = flag;
     }
 };
