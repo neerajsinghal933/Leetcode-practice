@@ -11,22 +11,22 @@
  */
 class Solution {
 public:
-    int cnt = 0;
+    int cnt =0 ;
     int goodNodes(TreeNode* root) {
-        
         fun(root, root->val);
         return cnt;
     }
     
-    void fun(TreeNode* root, int v)
+    void fun(TreeNode* root, int n)
     {
         if(!root)
-            return ;
-        if(root->val >= v){
+            return;
+        if(root->val>=n)
+        {
+            // cout<<root->val<<" ";
             cnt++;
-            cout<<root->val<<" ";
         }
-        fun(root->left, max(v, root->val));
-        fun(root->right, max(v, root->val));
+        fun(root->left, max(root->val, n));
+        fun(root->right, max(root->val, n));
     }
 };
