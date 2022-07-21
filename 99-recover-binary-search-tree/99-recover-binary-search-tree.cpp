@@ -17,7 +17,7 @@ public:
     
     void fun(TreeNode* root)
     {
-        if(!root)
+        if(!root )
             return;
         fun(root->left);
         if(first == NULL and root->val < prev->val)
