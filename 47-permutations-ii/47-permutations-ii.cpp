@@ -1,37 +1,30 @@
 class Solution {
 public:
-    vector<vector<int>> ans;
-    void dfs(vector<int> &temp, int n,unordered_map<int,int> &m)
+    map<vector<int>, int>m;
+    void fun(vector<int>&nums, int idx, vector<vector<int>>&ans)
     {
-        if(n==0)
+        if(idx==nums.size())
         {
-            ans.push_back(temp);
+            if(!m[nums])
+            {
+                ans.push_back(nums);
+                m[nums]++;
+            }
             return;
         }
-		
-        for(auto &it:m)
+        
+        for(int i=idx;i<nums.size();i++)
         {
-            if(it.second<=0) continue;
-
-            it.second--;
-            temp.push_back(it.first);
-			
-            dfs(temp,n-1,m);
-			
-            temp.pop_back();
-            it.second++;
+            swap(nums[i], nums[idx]);
+            fun(nums, idx+1, ans);
+            swap(nums[i], nums[idx]);
         }
     }
     
     vector<vector<int>> permuteUnique(vector<int>& ar) {
       
-        unordered_map<int,int> m;
-        for(int i:ar)
-        m[i]++;
-
-        vector<int> temp;
-        dfs(temp,ar.size(),m);
-
+        vector<vector<int>>ans;
+        fun(ar, 0, ans);
         return ans;
     }
 };
