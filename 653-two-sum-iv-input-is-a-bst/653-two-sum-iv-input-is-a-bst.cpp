@@ -11,13 +11,29 @@
  */
 class Solution {
 public:
-    map<int, int>m;
-    bool findTarget(TreeNode* root, int k) {
+    
+    void inorder(TreeNode* root, vector<int>&v)
+    {
         if(!root)
-            return false;
-        if(m[k-root->val])
-            return true;
-        m[root->val] = 1;
-        return findTarget(root->left, k) or findTarget(root->right, k);
+            return;
+        inorder(root->left, v);
+        v.push_back(root->val);
+        inorder(root->right, v);
+    }
+    
+    bool findTarget(TreeNode* root, int k) {
+        vector<int>v;
+        inorder(root, v);
+        int l = 0, h = v.size()-1;
+        while(l<h)
+        {
+            if(v[l] + v[h] == k)
+                return true;
+            if(v[l] + v[h] < k)
+                l++;
+            else
+                h--;
+        }
+        return false;
     }
 };
