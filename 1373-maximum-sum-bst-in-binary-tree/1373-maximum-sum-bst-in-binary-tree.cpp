@@ -13,10 +13,6 @@ class Solution {
 public:
     int ans = 0;
     int maxSumBST(TreeNode* root) {
-        if(!root)
-        {
-            return 0;
-        }
         solve(root);
         return ans;
     }
@@ -39,10 +35,10 @@ public:
     bool check(TreeNode* root, int a, int b)
     {
         if(!root)
-            return 1;
+            return true;
         if(root->val <= a or root->val >= b)
-            return 0;
-        return check(root->left, a, root->val) and  check(root->right, root->val, b);
+            return false;
+        return check(root->left, a, root->val) and check(root->right, root->val, b);
     }
     
     int get_sum(TreeNode* root, int &sum)
@@ -50,8 +46,7 @@ public:
         if(!root)
             return 0;
         int x = get_sum(root->left, sum) + get_sum(root->right, sum) + root->val;
-        sum = max(sum, x);
+        sum = max(x, sum);
         return x;
     }
-    
 };
