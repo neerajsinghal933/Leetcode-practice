@@ -3,6 +3,12 @@ public:
     vector<vector<int>> insert(vector<vector<int>>& v, vector<int>& newInterval) {
         // v.push_back(newInterval);
         int n = v.size();
+        vector<vector<int>>res;
+        if(n==0)
+        {
+            res.push_back(newInterval);
+            return res;
+        }
         // sort(v.begin(), v.end());
         
         int pos = -1;
@@ -21,46 +27,21 @@ public:
         }
         // cout<<pos+1;
         // v.insert(pos+1, newInterval);
+        v.insert(v.begin() + pos + 1, newInterval);
         
-        vector<vector<int>>res;
-        if(n==0)
-        {
-            res.push_back(newInterval);
-            return res;
-        }
-        int a, b;
-        if(pos+1==0)
-        {
-            a = newInterval[0];
-            b = newInterval[1];
-            if(v[0][0]<=b)
-                b = max(b, v[0][1]);
-            else
-            {
-                res.push_back({a, b});
-                a = v[0][0];
-                b = v[0][1];
-            } 
-        }
-        else{
-             a = v[0][0];
-             b = v[0][1];
-        }
+        // for(auto x:v)
+        // {
+        //     cout<<x[0]<<" "<<x[1]<<endl;
+        // }
+        
+        
+        
+        int a = v[0][0];
+        int b = v[0][1];
+        
         int i;
-        for(i=1;i<n;i++)
+        for(i=1;i<=n;i++)
         {
-            if(i==pos+1)
-            {
-               if(newInterval[0]<=b)
-                    b = max(b, newInterval[1]);
-                else
-                {
-                    res.push_back({a, b});
-                    a = newInterval[0];
-                    b = newInterval[1];
-                } 
-            }
-            
             if(v[i][0]<=b)
                 b = max(b, v[i][1]);
             else
@@ -70,18 +51,6 @@ public:
                 b = v[i][1];
             }
             
-        }
-        
-        if(i==pos+1)
-        {
-           if(newInterval[0]<=b)
-                b = max(b, newInterval[1]);
-            else
-            {
-                res.push_back({a, b});
-                a = newInterval[0];
-                b = newInterval[1];
-            } 
         }
             
         res.push_back({a, b});
