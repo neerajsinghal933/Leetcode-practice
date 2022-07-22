@@ -14,12 +14,12 @@ public:
     TreeNode* deleteNode(TreeNode* root, int key) {
         if(!root)
             return NULL;
-        if(key > root->val)
+        if(key>root->val)
         {
             root->right = deleteNode(root->right, key);
             return root;
         }
-        if(key < root->val)
+        if(key<root->val)
         {
             root->left = deleteNode(root->left, key);
             return root;
@@ -29,26 +29,26 @@ public:
             delete root;
             return NULL;
         }
-        if(!root->right)
-        {
-            TreeNode* temp = root->left;
-            delete root;
-            return temp;
-        }
         if(!root->left)
         {
-            TreeNode* temp = root->right;
+            TreeNode* t = root->right;
             delete root;
-            return temp;
+            return t;
+        }
+        if(!root->right)
+        {
+            TreeNode* t = root->left;
+            delete root;
+            return t;
         }
         TreeNode* succ = root->left;
         TreeNode* par = root;
-        while(succ->right != NULL)
+        while(succ->right)
         {
             par = succ;
             succ = succ->right;
         }
-        if(root!=par)
+        if(par!=root)
         {
             par->right = succ->left;
         }
