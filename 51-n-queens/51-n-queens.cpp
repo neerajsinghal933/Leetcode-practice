@@ -2,12 +2,12 @@ class Solution {
 public:
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>>res;
-        // vector<string>temp;
         vector<string>board(n);
         string s(n, '.');
         for(int i=0;i<n;i++)
+        {
             board[i] = s;
-        
+        }
         solve(board, n, 0, res);
         return res;
     }
@@ -16,14 +16,13 @@ public:
     {
         if(col==n)
         {
-            // cout<<"Y";
-            res.push_back(board);return;
+            res.push_back(board);
+            return;
         }
-        for(int row=0; row<n; row++)
+        for(int row=0;row<n;row++)
         {
             if(isSafe(board, row, col)==true)
             {
-                
                 board[row][col] = 'Q';
                 solve(board, n, col+1, res);
                 board[row][col] = '.';
@@ -31,23 +30,26 @@ public:
         }
     }
     
-    bool isSafe(vector<string>&board, int row, int col)
+    bool isSafe(vector<string>&board, int x, int y)
     {
-        for(int j=0;j<col;j++)
+        int n = board.size();
+        int m = board[0].size();
+        for(int j=0;j<y;j++)
         {
-            if(board[row][j]=='Q')
-            return  false;
+            if(board[x][j]=='Q')
+                return false;
         }
-        for(int i=row, j=col;i>=0 and j>=0; i--, j--)
+        for(int i=x, j=y; i>=0 and j>=0; i--, j--)
         {
             if(board[i][j]=='Q')
-            return false;
+                return false;
         }
-        for(int i=row, j=col; i<board.size() and j>=0; i++,j--)
+        for(int i=x, j=y; i<n and j>=0; i++, j--)
         {
             if(board[i][j]=='Q')
-            return false;
+                return false;
         }
         return true;
     }
+    
 };
