@@ -13,12 +13,11 @@ public:
             ans.push_back(nums);
             return;
         }
-        
         for(int i=idx;i<nums.size();i++)
         {
-            swap(nums[i], nums[idx]);
+            swap(nums[idx], nums[i]);
             fun(nums, idx+1, ans);
-            swap(nums[i], nums[idx]);
+            swap(nums[idx], nums[i]);
         }
     }
 };
