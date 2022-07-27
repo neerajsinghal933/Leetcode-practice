@@ -12,9 +12,9 @@
 class Solution {
 public:
     void flatten(TreeNode* root) {
+        stack<TreeNode*>st;
         if(!root)
             return;
-        stack<TreeNode*>st;
         st.push(root);
         while(!st.empty())
         {
@@ -26,6 +26,8 @@ public:
                 st.push(t->left);
             if(!st.empty())
                 t->right = st.top();
+            else
+                t->right = NULL;
             t->left = NULL;
         }
     }
