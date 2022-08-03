@@ -1,45 +1,53 @@
 class Solution {
 public:
-    int res = -1;
     
-    void dfs(vector<int>&edges, vector<int>&vis, int src, int cnt, vector<int>&order)
+    void dfs(int node, vector<int>*adj, vector<int>&vis, vector<int>&order, int &m, int &cnt, map<int, int>&seen)
     {
-        if(!vis[src])
+        vis[node] = 1;
+        order[node] = 1;
+        for(int x:adj[node])
         {
-            vis[src] = 1;
-            order[src] = cnt;
-            if(edges[src]!=-1)
+            if(!vis[x])
             {
-                dfs(edges, vis, edges[src], cnt+1, order);
+                cnt++;
+                seen[x] = cnt;
+                dfs(x, adj, vis, order, m, cnt, seen);
             }
-            order[src] = -1;
-        }
-        else
-        {
-            if(order[src]!=-1)
+            else if(order[x])
             {
-                res = max(res, cnt - order[src]);
+                m = cnt - seen[x]+1;
+                return;
             }
         }
+        order[node] = 0;
+        return;
     }
     
     int longestCycle(vector<int>& edges) {
         int n = edges.size();
-        // vector<vector<int>>adj(n);
-        // for(int i=0;i<edges.size();i++)
-        // {
-        //     if(edges[i]!=-1)
-        //     adj[i].push_back(edges[i]);
-        // }
-        vector<int>vis(n, 0);
-        vector<int>order(n, -1);
+        vector<int>adj[n+1];
         for(int i=0;i<n;i++)
         {
-            // int cnt = 1;
-            if(!vis[i])
-                dfs(edges, vis, i, 0, order);
+            if(edges[i]!=-1)
+                adj[i].push_back(edges[i]);
         }
-        return res;
+        int mx = -1;
+        vector<int>vis(n+1, 0);
+        vector<int>order(n+1, 0);
+        for(int i=0;i<n;i++)
+        {
+            if(!vis[i])
+            {
+                map<int, int>seen;
+                int m = 0, cnt = 0;
+                seen[i] = 0;
+                dfs(i, adj, vis, order, m, cnt, seen);
+                if(m)
+                {
+                    mx = max(mx, m);
+                }
+            }
+        }
+        return mx;
     }
-    
 };
