@@ -23,7 +23,7 @@ public:
                 for(int j=0;j<wordSize;j++)
                 {
                     char temp = s[j];
-                    for(int c='a';c<='z';c++)
+                    for(char c='a';c<='z';c++)
                     {
                         s[j] = c;
                         if(s==endWord)
