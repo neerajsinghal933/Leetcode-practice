@@ -6,10 +6,10 @@ public:
         q.push(beginWord);
         int wordSize = beginWord.size();
         
-        unordered_set<string>word;
+        unordered_set<string>st;
         for(auto s:wordList)
-            word.insert(s);
-        if(word.find(endWord)==word.end())
+            st.insert(s);
+        if(st.find(endWord)==st.end())
             return 0;
         int len = 0;
         while(!q.empty())
@@ -28,16 +28,16 @@ public:
                         s[j] = c;
                         if(s==endWord)
                             return len+1;
-                        if(word.find(s)==word.end())
+                        if(st.find(s)==st.end())
                             continue;
-                        word.erase(s);
+                        st.erase(s);
                         q.push(s);
                     }
                     s[j] = temp;
+                    
                 }
             }
         }
         return 0;
-        
     }
 };
