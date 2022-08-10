@@ -9,7 +9,7 @@ public:
         q.push("0000");
         if(st.find("0000")!=st.end())
             return -1;
-        map<string, int>mp;
+        // map<string, int>mp;
         vector<vector<int>>dir  = {{0, 1}, {0, -1}, {1, 1}, {1, -1}, {2, 1}, {2, -1}, {3, 1}, {3, -1}};
         while(!q.empty())
         {
@@ -27,13 +27,15 @@ public:
                     t[dir[k][0]] = (t[dir[k][0]] - '0' + dir[k][1]+10)%10 + '0'; 
                     // cout<<t<<" ";
                     // break;
-                    if(mp[t]==1)
-                        continue;
-                    mp[t] = 1;
+                    // if(mp[t]==1)
+                    //     continue;
+                    // mp[t] = 1;
                     if(st.find(t)==st.end())
                     {
                         q.push(t);
+                        st.insert(t);
                     }
+                    
                 }
                 // break;
             }
