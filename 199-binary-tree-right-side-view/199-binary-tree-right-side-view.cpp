@@ -11,27 +11,23 @@
  */
 class Solution {
 public:
+    
+    unordered_map<int, int>m;
     vector<int> rightSideView(TreeNode* root) {
         vector<int>res;
-        queue<TreeNode*>q;
-        if(!root)
-            return res;
-        q.push(root);
-        while(!q.empty())
-        {
-            int sz = q.size();
-            for(int i=0;i<sz;i++)
-            {
-                TreeNode* t = q.front();
-                q.pop();
-                if(i==sz-1)
-                    res.push_back(t->val);
-                if(t->left)
-                    q.push(t->left);
-                if(t->right)
-                    q.push(t->right);
-            }
-        }
+        fun(root, 0, 0, res);
         return res;
+    }
+    
+    void fun(TreeNode* root, int curr, int hei, vector<int>&res)
+    {
+        if(!root)
+            return;
+        if(m[curr]==0 and curr==hei){
+            m[curr] = 1;
+            res.push_back(root->val);
+        }
+        fun(root->right, curr+1, hei+1, res);
+        fun(root->left, curr+1, hei+1, res);
     }
 };
