@@ -2,9 +2,12 @@ class Solution {
 public:
     int openLock(vector<string>& deadends, string target) {
         queue<string>q;
+        unordered_set<string>st;
+        for(string s:deadends)
+            st.insert(s);
         int cnt = -1;
         q.push("0000");
-        if(find(deadends.begin(), deadends.end(), "0000")!=deadends.end())
+        if(st.find("0000")!=st.end())
             return -1;
         map<string, int>mp;
         vector<vector<int>>dir  = {{0, 1}, {0, -1}, {1, 1}, {1, -1}, {2, 1}, {2, -1}, {3, 1}, {3, -1}};
@@ -27,7 +30,7 @@ public:
                     if(mp[t]==1)
                         continue;
                     mp[t] = 1;
-                    if(find(deadends.begin(), deadends.end(), t)==deadends.end())
+                    if(st.find(t)==st.end())
                     {
                         q.push(t);
                     }
