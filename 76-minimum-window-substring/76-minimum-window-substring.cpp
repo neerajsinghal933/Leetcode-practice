@@ -1,64 +1,62 @@
 class Solution {
 public:
-    bool isCheck(unordered_map<char, int> &tmp, unordered_map<char, int> &smp)
+    
+    bool check(unordered_map<char, int>&tmp, unordered_map<char, int>&smp)
     {
-        for(auto x : tmp)
+        for(auto x:tmp)
         {
             if(smp[x.first] < x.second)
                 return false;
         }
         return true;
     }
+    
     string minWindow(string s, string t) {
-        int m = s.size(), n = t.size();
-        unordered_map<char, int> tmp, smp;
-        // string ans = "";
-        int begin = -1, end = -1;
-        int res = INT_MAX;
-        for(int i = 0; i < n; i++)
+        int m = s.size();
+        int n = t.size();
+        unordered_map<char, int>smp, tmp;
+        for(int i=0;i<n;i++)
         {
+            smp[s[i]]++;
             tmp[t[i]]++;
-            smp[s[i]]++;    
         }
+        int begin=-1, end=-1;
+        int res = INT_MAX;
         bool flag = false;
-        if(isCheck(tmp, smp))
+        if(check(tmp, smp))
         {
-            flag = true;
-            begin = 0;
+            flag=true;
+            begin=0;
             end = n-1;
             res = n;
+            return s.substr(0, n);
         }
-        int i = 0;
-        for(int j = n; j < m; j++)
+        int i=0;
+        for(int j=n;j<m;j++)
         {
             smp[s[j]]++;
-            // cout<<s[j]<<"   "<<smp[s[j]]<<endl;
             if(!flag)
             {
-                if(isCheck(tmp, smp))
-                    flag = true;
+                if(check(tmp, smp))
+                    flag=1;
             }
             if(flag)
             {
-                while(smp[s[i]] > tmp[s[i]])
+                while(smp[s[i]]>tmp[s[i]])
                 {
                     smp[s[i]]--;
                     i++;
                 }
-                // cout<<smp[s[i]]<<" "<<tmp[s[i]]<<" "<<i<<" "<<j<<" "<<res<<endl;
-                if(res > j-i+1)
+                if(j-i+1<res)
                 {
                     res = j-i+1;
                     begin = i;
                     end = j;
                 }
             }
-            // j++;
         }
-        // cout<<res<<endl;
-        if(begin == -1)
+        if(begin==-1)
             return "";
         return s.substr(begin, res);
-        
     }
 };
