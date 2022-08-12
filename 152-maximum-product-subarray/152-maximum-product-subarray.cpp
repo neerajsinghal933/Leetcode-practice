@@ -2,43 +2,30 @@ class Solution {
 public:
     int maxProduct(vector<int>& nums) {
         int n = nums.size();
-        int ans = 0;
-        int mx = INT_MIN;
         if(n==1)
             return nums[0];
-        int first=1, second=1, flag=true;
-        for(int i=0;i<n;i++)
+        int mx = nums[0];
+        int mn = nums[0];
+        // int ans = nums[0];
+        int cmx = nums[0];
+        int cmin = nums[0];
+        for(int i=1;i<n;i++)
         {
-            if(nums[i]==0)
-            {
-                first = 1;
-                second = 1;
-                flag=true;
-            }
-            else
-            {
-                if(nums[i]<0 and flag)
-                {
-                    flag=false;
-                    first *= nums[i];
-                }
-                else
-                {
-                    if(!flag)
-                        second *= nums[i];
-                    first *= nums[i];
-                    ans = max(ans, max(first, second));
-                }
-                // first *= nums[i];
-                // ans = max(ans, max(first, second));
-            }
+            int a = max({nums[i], cmx*nums[i], cmin*nums[i]});
+            int b = min({nums[i], cmx*nums[i], cmin*nums[i]});
+            mx = max(mx, a);
+            mn = min(mn, b);
+            cmx = a;
+            cmin = b;
             
-            mx = max(mx, nums[i]);
+            // mn = min({nums[i],a,b});
+            // mx = max({nums[i], a, b});
+            // mx = max(nums[i], nums[i]*mx);
+            // mn = min(nums[i], nums[i]*mn);
+            // cout<<mx<<" "<<mn<<endl;
+            // ans = max(mn,mx);
+            // ans = max({ans, mx, mn});
         }
-        
-        if(mx<0 and ans <0)
-            return mx;
-        return max(mx, ans);
-        
+        return mx;
     }
 };
