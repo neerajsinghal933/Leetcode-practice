@@ -1,20 +1,21 @@
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        int curr = nums[0];
         int n = nums.size();
+        // int curr = nums[0];
+        int mx = nums[0];
         if(n==1)
             return true;
-        int i=1;
-        while(1)
+        for(int i=0;i<n;i++)
         {
-            if(curr<i)
+            if(i>mx)
+            {
                 return false;
-            curr = max(curr, i+nums[i]);
-            i++;
-            if(curr>=n-1)
+            }
+            mx = max(mx, i+nums[i]);
+            if(mx>=n-1)
                 return true;
         }
-        return false;
+        return 1;
     }
 };
