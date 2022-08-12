@@ -17,11 +17,11 @@ public:
         // int sellStock = INT_MIN;
         if(buy)
         {
-           return dp[idx][buy] = max(-v[idx] + fun(v, idx+1, !buy, fee), fun(v, idx+1, buy, fee));
+           return dp[idx][buy] = max(-(v[idx]+fee) + fun(v, idx+1, !buy, fee), fun(v, idx+1, buy, fee));
         }
         else
         {
-            return dp[idx][buy] = max(v[idx] - fee + fun(v, idx+1, !buy, fee), fun(v, idx+1, buy, fee));
+            return dp[idx][buy] = max(v[idx]  + fun(v, idx+1, !buy, fee), fun(v, idx+1, buy, fee));
         }
     }
 };
