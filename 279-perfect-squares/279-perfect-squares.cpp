@@ -31,7 +31,7 @@ public:
             
             for(int j=1;j*j<=i;j++)
             {
-                if(i-j*j>=0)
+                // if(i-j*j>=0)
                 dp[i] = min(dp[i], dp[i-j*j]+1);    
             }
         }
