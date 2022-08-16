@@ -8,15 +8,25 @@ public:
         int cnt = 0;
         memset(dp, -1, sizeof(dp));
         fun(nums1, nums2, 0, 0);
-        // for(int i=0;i<=n1;i++)
-        // {
-        //     for(int j=0;j<=n2;j++)
-        //     {
-        //         cout<<dp[i][j]<<" ";
-        //     }
-        //     cout<<endl;
-        // }
-        return dp[0][0];
+        for(int i=0;i<=n1;i++)
+        {
+            for(int j=0;j<=n2;j++)
+            {
+                if(i==0 or j==0)
+                    dp[i][j] = 0;
+                else
+                {
+                    if(nums1[i-1]==nums2[j-1])
+                    {
+                        dp[i][j] = 1 + dp[i-1][j-1];
+                    }
+                    else
+                        dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+            // cout<<endl;
+        }
+        return dp[n1][n2];
     }
     
     int fun(vector<int>&nums1, vector<int>&nums2, int x, int y)
