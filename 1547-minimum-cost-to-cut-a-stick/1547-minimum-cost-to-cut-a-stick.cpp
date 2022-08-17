@@ -8,7 +8,6 @@ public:
         return fun(0, n, cuts, 0, sz-1);
     }
     
-    
     int fun(int rodStart, int rodEnd, vector<int>&cuts, int s, int e)
     {
         if(s>e)
